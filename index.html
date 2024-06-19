@@ -82,13 +82,24 @@
     </div>
 
     <div class="container" id="feature2Container" style="display: none">
-      <h1>Sende forbedringsforslag</h1>
-      <p>Kommer snart</p>
+      <h1>Send forbedringsforslag</h1>
+      <form id="contactForm" action="https://formspree.io/f/mqazzzgy" method="POST">
+        <div class="form-group">
+          <label for="skiftlag">Skiftlag:</label>
+          <input type="text" id="skiftlag" name="skiftlag" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="improvement">Improvement Suggestion:</label>
+          <textarea id="improvement" name="improvement" class="form-control" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <script src="script.js"></script>
   </body>
 </html>
