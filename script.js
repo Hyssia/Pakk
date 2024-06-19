@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const passwordInput = document.getElementById('passwordInput');
   const loginContainer = document.getElementById('loginContainer');
   const mainContainer = document.getElementById('mainContainer');
+  const navContainer = document.getElementById('navContainer');
   const feature1Container = document.getElementById('feature1Container');
   const feature2Container = document.getElementById('feature2Container');
-  const navButtons = document.querySelectorAll('.nav-button');
-  const sideNav = document.getElementById('sidenav');
+  const navLinks = document.querySelectorAll('.nav-link');
 
   // Function to set a cookie
   function setCookie(name, value, days) {
@@ -33,11 +33,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (getCookie('loggedIn') === 'true') {
       loginContainer.style.display = 'none';
       mainContainer.style.display = 'block';
-      sideNav.style.display = 'block';
+      navContainer.style.display = 'block';
     } else {
       loginContainer.style.display = 'block';
+      navContainer.style.display = 'none';
       mainContainer.style.display = 'none';
-      sideNav.style.display = 'none';
     }
   }
 
@@ -50,15 +50,17 @@ document.addEventListener('DOMContentLoaded', function () {
         setCookie('loggedIn', 'true', 1); // Expires in 1 day
         loginContainer.style.display = 'none';
         mainContainer.style.display = 'block';
+        navContainer.style.display = 'block';
       } else {
         alert('Incorrect password');
       }
     });
   }
 
-  navButtons.forEach(button => {
-    button.addEventListener('click', function () {
-      const target = button.getAttribute('data-target');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      const target = link.getAttribute('data-target');
       document.querySelectorAll('.container').forEach(container => {
         if (container.id === target) {
           container.style.display = 'block';
