@@ -41,18 +41,42 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  //   if (loginButton) {
+  //     loginButton.addEventListener('click', function () {
+  //       const password = passwordInput.value;
+  //       if (password === 'Ranheim') {
+  //         setCookie('loggedIn', 'true', 1); // Expires in 1 day
+  //         loginContainer.style.display = 'none';
+  //         mainContainer.style.display = 'block';
+  //         navContainer.style.display = 'block';
+  //       } else {
+  //         alert('Incorrect password');
+  //       }
+  //     });
+  //   }
+
+  function handleLogin() {
+    const password = passwordInput.value;
+    if (password === 'Ranheim') {
+      setCookie('loggedIn', 'true', 1); // Expires in 1 day
+      loginContainer.style.display = 'none';
+      mainContainer.style.display = 'block';
+      navContainer.style.display = 'block';
+    } else {
+      alert('Incorrect password');
+    }
+  }
+
   checkLogin();
 
   if (loginButton) {
-    loginButton.addEventListener('click', function () {
-      const password = passwordInput.value;
-      if (password === 'Ranheim') {
-        setCookie('loggedIn', 'true', 1); // Expires in 1 day
-        loginContainer.style.display = 'none';
-        mainContainer.style.display = 'block';
-        navContainer.style.display = 'block';
-      } else {
-        alert('Incorrect password');
+    loginButton.addEventListener('click', handleLogin);
+  }
+
+  if (passwordInput) {
+    passwordInput.addEventListener('keyup', function (event) {
+      if (event.key === 'Enter') {
+        handleLogin();
       }
     });
   }
