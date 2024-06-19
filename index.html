@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Information</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  </head>
+  <body>
+    <div class="nav-bar">
+      <a href="#" id="homeIcon">
+        <i class="fas fa-home"></i>
+      </a>
+    </div>
+
+    <div class="side-nav" id="sidenav">
+      <button class="nav-button bg-primary" data-target="mainContainer">Main</button>
+      <button class="nav-button bg-secondary" data-target="feature1Container">Feature 1</button>
+      <button class="nav-button bg-secondary" data-target="feature2Container">Feature 2</button>
+    </div>
+
+    <div class="container" id="loginContainer" style="display: none">
+      <img src="logo.png" alt="" / style="width:10rem">
+      <h1>Login</h1>
+      <div class="form-group">
+        <label for="passwordInput">Password:</label>
+        <input type="password" id="passwordInput" class="form-control" />
+      </div>
+      <button id="loginButton" class="btn btn-primary">Login</button>
+    </div>
+
+    <div class="container border" id="mainContainer">
+      <h1>Pakk Spesifikasjoner</h1>
+      <div class="form-group">
+        <label for="codeInput">Enter PAKK ID:</label>
+        <input type="text" id="codeInput" class="form-control" maxlength="5" />
+      </div>
+      <p id="description" class="font-weight-bold"></p>
+      <p id="kolonne" class="font-weight-bold"></p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Inner heads</th>
+            <th scope="col">Outer heads</th>
+            <th scope="col">Center Tape</th>
+            <th scope="col">End Tape</th>
+            <th scope="col">of Wraps</th>
+            <th scope="col">Straps</th>
+            <th scope="col">Wrap BW</th>
+            <th scope="col">Heads BW</th>
+            <th scope="col">Inner heads BW</th>
+            <th scope="col">Outer Heads BW</th>
+            <th scope="col">Rolls/Pack</th>
+            <th scope="col">Of labels</th>
+          </tr>
+        </thead>
+        <tbody id="infoTable">
+          <tr>
+            <td id="innerHeads"></td>
+            <td id="outerHeads"></td>
+            <td id="centerBands"></td>
+            <td id="endBands"></td>
+            <td id="wraps"></td>
+            <td id="straps"></td>
+            <td id="wrapBW"></td>
+            <td id="headsBW"></td>
+            <td id="innerHeadsBW"></td>
+            <td id="outerHeadsBW"></td>
+            <td id="rollsPerPack"></td>
+            <td id="labels"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container" id="feature1Container" style="display: none">
+      <h1>Feature 1</h1>
+      <p>This is the content for Feature 1.</p>
+    </div>
+
+    <div class="container" id="feature2Container" style="display: none">
+      <h1>Feature 2</h1>
+      <p>This is the content for Feature 2.</p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
