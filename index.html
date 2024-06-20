@@ -44,47 +44,52 @@
     </div>
 
     <div class="container border" id="mainContainer">
-      <h1>Pakk Spesifikasjoner</h1>
+      <div class="header">
+        <h1>Pakk Spesifikasjoner</h1>
+        <img src="logo.png" alt="Logo" id="hLogo" style="width: 10rem" />
+      </div>
       <div class="form-group">
         <label for="codeInput">Enter PAKK ID:</label>
         <input type="text" id="codeInput" class="form-control" maxlength="5" />
       </div>
       <p id="description" class="font-weight-bold"></p>
       <p id="kolonne" class="font-weight-bold"></p>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Inner heads</th>
-            <th scope="col">Outer heads</th>
-            <th scope="col">Center Tape</th>
-            <th scope="col">End Tape</th>
-            <th scope="col">of Wraps</th>
-            <th scope="col">Straps</th>
-            <th scope="col">Wrap BW</th>
-            <th scope="col">Heads BW</th>
-            <th scope="col">Inner heads BW</th>
-            <th scope="col">Outer heads BW</th>
-            <th scope="col">Rolls/Pack</th>
-            <th scope="col">Of labels</th>
-          </tr>
-        </thead>
-        <tbody id="infoTable">
-          <tr>
-            <td id="innerHeads"></td>
-            <td id="outerHeads"></td>
-            <td id="centerBands"></td>
-            <td id="endBands"></td>
-            <td id="wraps"></td>
-            <td id="straps"></td>
-            <td id="wrapBW"></td>
-            <td id="headsBW"></td>
-            <td id="innerHeadsBW"></td>
-            <td id="outerHeadsBW"></td>
-            <td id="rollsPerPack"></td>
-            <td id="labels"></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Inner heads</th>
+              <th scope="col">Outer heads</th>
+              <th scope="col">Center Tape</th>
+              <th scope="col">End Tape</th>
+              <th scope="col">of Wraps</th>
+              <th scope="col">Straps</th>
+              <th scope="col">Wrap BW</th>
+              <th scope="col">Heads BW</th>
+              <th scope="col">Inner heads BW</th>
+              <th scope="col">Outer heads BW</th>
+              <th scope="col">Rolls/Pack</th>
+              <th scope="col">Of labels</th>
+            </tr>
+          </thead>
+          <tbody id="infoTable">
+            <tr>
+              <td id="innerHeads"></td>
+              <td id="outerHeads"></td>
+              <td id="centerBands"></td>
+              <td id="endBands"></td>
+              <td id="wraps"></td>
+              <td id="straps"></td>
+              <td id="wrapBW"></td>
+              <td id="headsBW"></td>
+              <td id="innerHeadsBW"></td>
+              <td id="outerHeadsBW"></td>
+              <td id="rollsPerPack"></td>
+              <td id="labels"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="container" id="feature1Container" style="display: none">
