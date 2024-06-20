@@ -24,6 +24,12 @@ body {
   color: #ddd;
 }
 
+.dropdown {
+  color: white;
+  font-family: Verdana, sans-serif;
+  padding-top: 0.3rem;
+}
+
 .dropdown-menu {
   background-color: #404040;
   border: none;
@@ -97,7 +103,8 @@ body {
   .nav-bar a {
     font-size: 1rem;
   }
-  
+
   #hLogo {
     display: none;
   }
+}
