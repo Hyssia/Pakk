@@ -129,6 +129,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('outerHeadsBW').textContent = record['Outer Heads BW'];
                 document.getElementById('rollsPerPack').textContent = record['Rolls/Pack'];
                 document.getElementById('labels').textContent = record['Of labels'];
+
+                updateChart(record);
               } else {
                 console.log('No matching record found');
                 document.getElementById('description').textContent = '';
@@ -144,6 +146,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('outerHeadsBW').textContent = '';
                 document.getElementById('rollsPerPack').textContent = '';
                 document.getElementById('labels').textContent = '';
+
+                updateChart(null);
               }
             } else {
               console.error('Data is not an array', data);
@@ -154,5 +158,39 @@ document.addEventListener('DOMContentLoaded', function () {
           });
       }
     });
+  }
+
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['End Tape', 'Straps', 'Rolls/Pack'],
+      datasets: [
+        {
+          label: 'Verdier',
+          data: [0, 0, 0], // Initial dummy data
+          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(75, 192, 192, 1)'],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  // Function to update Chart.js chart
+  function updateChart(record) {
+    if (record) {
+      myChart.data.datasets[0].data = [record['End Bands'], record['Straps'], record['Rolls/Pack']];
+    } else {
+      myChart.data.datasets[0].data = [0, 0, 0];
+    }
+    myChart.update();
   }
 });
