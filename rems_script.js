@@ -82,8 +82,9 @@ document.addEventListener('DOMContentLoaded', function () {
     sumValue = 0;
   }
 
-  function appendLog(logData) {
+  function appendLog(logData, docId) {
     const row = document.createElement('tr');
+    addedlogs.add(docId);
     row.innerHTML = `
         <td>${logData.orderNumber}</td>
         <td>${logData.format}</td>
@@ -118,6 +119,18 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
+  function fetchLogs() {
+    db.collection('logs').get().then(snapshot => {
+      snapshot.forEach(doc => {
+        appendog(doc.data(), doc.id);
+      });
+    }).catch(error => {
+      console.error('Error fetching logs: ',error);
+    });
+  }
+
+  fetchLogs();
 
   clearLog.addEventListener('click', () => {
     db.collection('logs')
