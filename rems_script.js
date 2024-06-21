@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function fetchLogs() {
     db.collection('logs').get().then(snapshot => {
       snapshot.forEach(doc => {
-        appendog(doc.data(), doc.id);
+        appendLog(doc.data(), doc.id);
       });
     }).catch(error => {
       console.error('Error fetching logs: ',error);
