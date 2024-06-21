@@ -83,8 +83,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function appendLog(logData, docId) {
+if (addedLogs.has(docId)) return;
+
+
+    addedLogs.add(docId);
     const row = document.createElement('tr');
-    addedlogs.add(docId);
     row.innerHTML = `
         <td>${logData.orderNumber}</td>
         <td>${logData.format}</td>
