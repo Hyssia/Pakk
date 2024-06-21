@@ -35,7 +35,7 @@ body {
 }
 
 .title_style {
-  color: red;
+  color: red !important;
 }
 
 .dropdown-menu {
