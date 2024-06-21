@@ -31,6 +31,19 @@ document.addEventListener('DOMContentLoaded', function () {
   let remsOutValue = 0;
   let sumValue = 0;
 
+
+    function fetchLogs() {
+    db.collection('logs').get().then(snapshot => {
+      snapshot.forEach(doc => {
+        appendLog(doc.data(), doc.id);
+      });
+    }).catch(error => {
+      console.error('Error fetching logs: ',error);
+    });
+  }
+
+  fetchLogs();
+
   increment.addEventListener('click', () => {
     remsOutValue++;
     remsOut.value = remsOutValue;
@@ -121,18 +134,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-
-  function fetchLogs() {
-    db.collection('logs').get().then(snapshot => {
-      snapshot.forEach(doc => {
-        appendLog(doc.data(), doc.id);
-      });
-    }).catch(error => {
-      console.error('Error fetching logs: ',error);
-    });
-  }
-
-  fetchLogs();
 
   clearLog.addEventListener('click', () => {
     db.collection('logs')
