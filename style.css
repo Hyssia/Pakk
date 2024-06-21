@@ -25,9 +25,16 @@ body {
 }
 
 .dropdown {
-  color: white;
+  color: red;
   font-family: Verdana, sans-serif;
   padding-top: 0.05rem;
+}
+
+.d_style {
+  color: white;
+}
+
+.title_style {
 }
 
 .dropdown-menu {
@@ -53,6 +60,10 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+}
+
+#logForm {
+  padding-bottom: 5rem;
 }
 
 /* Media queries for responsive design */

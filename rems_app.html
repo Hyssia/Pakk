@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PM5 Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LT9ZRFRQC"></script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-2LT9ZRFRQC');
+    </script>
+  </head>
+  <body>
+    <div class="nav-bar" id="navContainer">
+      <div class="dropdown">
+        <a href="#" id="homeIcon" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-home"></i>
+        </a>
+        <span class="d_style">|</span> <span class="title_style">PM5 Dashboard</span> <span class="d_style">|</span>
+        <a href="rems_app.html">REMS Utskudd</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item nav-link text-dark" href="index.html" data-target="mainContainer">Tilbake</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container border" id="logFormContainer">
+      <div class="header">
+        <h1>Order Tracking Log</h1>
+        <img src="img/Blod.png" alt="Logo" id="hLogo" style="width: 15rem" />
+      </div>
+
+      <form id="logForm" onsubmit="return false;">
+        <div class="form-group">
+            <label for="orderNumber">Order Number:</label>
+            <input type="text" id="orderNumber" class="form-control" placeholder="000000">
+        </div>
+        <div class="form-group">
+            <label for="format">Format:</label>
+            <input type="text" id="format" class="form-control" placeholder="12,0">
+        </div>
+        <div class="form-group">
+            <label for="remsOut">Rems Out:</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="button" id="decrement">-</button>
+                </div>
+                <input type="text" id="remsOut" class="form-control" value="0" readonly>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="increment">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="sum">Sum:</label>
+            <input type="text" id="sum" class="form-control" value="0" readonly>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>
+            <button type="button" id="nextSet" class="btn btn-info">Next Set</button>
+            <button type="button" id="sendLog" class="btn btn-primary">Send</button>
+            <button type="button" id="resetLog" class="btn btn-danger">Reset</button>
+          </div>
+          <button type="button" id="clearLog" class="btn btn-warning ml-auto">Clear Log</button>
+        </div>
+    </form>
+    <h2>Logs</h2>
+    <table class="table table-striped" id="logTable">
+        <thead>
+            <tr>
+                <th scope="col">Order Number</th>
+                <th scope="col">Format</th>
+                <th scope="col">Sum</th>
+                <th scope="col">Timestamp</th>
+            </tr>
+        </thead>
+        <tbody id="logBody">
+            <!-- Log rows will be appended here -->
+        </tbody>
+    </table>
+</div>
+
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script src="rems_script.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
