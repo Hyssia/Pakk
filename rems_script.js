@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     remsOut.value = remsOutValue;
   });
 
-  sendLog.addEventListener('click', () => {
+  sendLog.addEventListener('click', (event) => {
     event.preventDefault();
     const logData = {
       orderNumber: orderNumber.value,
@@ -83,8 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function appendLog(logData, docId) {
-if (addedLogs.has(docId)) return;
-
+    if (addedLogs.has(docId)) return;
 
     addedLogs.add(docId);
     const row = document.createElement('tr');
@@ -152,5 +151,6 @@ if (addedLogs.has(docId)) return;
         });
       });
     logBody.innerHTML = '';
+    addedLogs.clear();
   });
 });
