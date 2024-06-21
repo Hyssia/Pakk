@@ -67,6 +67,11 @@ body {
   padding-bottom: 5rem;
 }
 
+.btnNext {
+  margin-top: 1rem !important;
+  margin-bottom: 2rem;
+}
+
 /* Media queries for responsive design */
 @media (max-width: 768px) {
   .header {
