@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+  const addedLogs = new Set();
+
   // Firebase configuration
   const firebaseConfig = {
     apiKey: 'AIzaSyAvaXLxAX580y8HfF_Vp4blHsm_b1notvU',
@@ -91,10 +93,28 @@ document.addEventListener('DOMContentLoaded', function () {
     logBody.appendChild(row);
   }
 
+  //   db.collection('logs').onSnapshot(snapshot => {
+  //     snapshot.docChanges().forEach(change => {
+  //       if (change.type === 'added') {
+  //         appendLog(change.doc.data());
+  //       }
+  //     });
+  //   });
+
   db.collection('logs').onSnapshot(snapshot => {
     snapshot.docChanges().forEach(change => {
       if (change.type === 'added') {
-        appendLog(change.doc.data());
+        appendLog(change.doc.data(), change.doc.id);
+      } else if (change.type === 'removed') {
+        const rows = logBody.getElementsByTagName('tr');
+        for (let i = 0; i < rows.length; i++) {
+          const row = rows[i];
+          if (row.cells[3].innerText === change.doc.data().timestamp) {
+            logBody.removeChild(row);
+            addedLogs.delete(change.doc.id); // Remove from the set
+            break;
+          }
+        }
       }
     });
   });
