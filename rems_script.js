@@ -1,20 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
+  console.log('Script loaded and DOM fully loaded');
+
   const addedLogs = new Set();
 
   // Firebase configuration
-  const firebaseConfig = {
-    apiKey: 'AIzaSyAvaXLxAX580y8HfF_Vp4blHsm_b1notvU',
-    authDomain: 'pm5dashboard.firebaseapp.com',
-    projectId: 'pm5dashboard',
-    storageBucket: 'pm5dashboard.appspot.com',
-    messagingSenderId: '319947922125',
-    appId: '1:319947922125:web:30cb9b06deff8b855d2784',
-    measurementId: 'G-BSDFEN5ESR',
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  //   const firebaseConfig = {
+  //     apiKey: 'AIzaSyAvaXLxAX580y8HfF_Vp4blHsm_b1notvU',
+  //     authDomain: 'pm5dashboard.firebaseapp.com',
+  //     projectId: 'pm5dashboard',
+  //     storageBucket: 'pm5dashboard.appspot.com',
+  //     messagingSenderId: '319947922125',
+  //     appId: '1:319947922125:web:30cb9b06deff8b855d2784',
+  //     measurementId: 'G-BSDFEN5ESR',
+  //   };
+  //   // Initialize Firebase
+  //   firebase.initializeApp(firebaseConfig);
 
-  const db = firebase.firestore(); // or firebase.database() for Realtime Database
+  //   const db = firebase.firestore(); // or firebase.database() for Realtime Database
 
   const orderNumber = document.getElementById('orderNumber');
   const format = document.getElementById('format');
@@ -31,15 +33,17 @@ document.addEventListener('DOMContentLoaded', function () {
   let remsOutValue = 0;
   let sumValue = 0;
 
-
-    function fetchLogs() {
-    db.collection('logs').get().then(snapshot => {
-      snapshot.forEach(doc => {
-        appendLog(doc.data(), doc.id);
+  function fetchLogs() {
+    db.collection('logs')
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          appendLog(doc.data(), doc.id);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching logs: ', error);
       });
-    }).catch(error => {
-      console.error('Error fetching logs: ',error);
-    });
   }
 
   fetchLogs();
@@ -63,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
     remsOut.value = remsOutValue;
   });
 
-  sendLog.addEventListener('click', (event) => {
+  sendLog.addEventListener('click', event => {
     event.preventDefault();
     const logData = {
       orderNumber: orderNumber.value,
@@ -135,23 +139,93 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  clearLog.addEventListener('click', () => {
-    db.collection('logs')
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          db.collection('logs')
+  //   clearLog.addEventListener('click', () => {
+  //     console.log('Clear logs button clicked');
+  //     db.collection('logs')
+  //       .get()
+  //       .then(snapshot => {
+  //         if (snapshot.empty) {
+  //           console.log('No documents found');
+  //           return;
+  //         }
+  //         const deletePromises = [];
+  //         snapshot.forEach(doc => {
+  //           console.log(`Attempting to delete document ID: ${doc.id}`);
+  //           deletePromises.push(
+  //             db
+  //               .collection('logs')
+  //               .doc(doc.id)
+  //               .delete()
+  //               .then(() => {
+  //                 console.log(`Document ID ${doc.id} successfully deleted!`);
+  //               })
+  //               .catch(error => {
+  //                 console.error(`Error removing document ID ${doc.id}: `, error);
+  //               })
+  //           );
+  //         });
+  //         return Promise.all(deletePromises); // Ensure all deletions are completed
+  //       })
+  //       .then(() => {
+  //         console.log('All documents deleted, clearing UI');
+  //         logBody.innerHTML = '';
+  //         addedLogs.clear();
+  //       })
+  //       .catch(error => {
+  //         console.error('Error clearing logs: ', error);
+  //       });
+  //   });
+});
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyAvaXLxAX580y8HfF_Vp4blHsm_b1notvU',
+  authDomain: 'pm5dashboard.firebaseapp.com',
+  projectId: 'pm5dashboard',
+  storageBucket: 'pm5dashboard.appspot.com',
+  messagingSenderId: '319947922125',
+  appId: '1:319947922125:web:30cb9b06deff8b855d2784',
+  measurementId: 'G-BSDFEN5ESR',
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+function clearLogs() {
+  console.log('Clear logs button clicked');
+  db.collection('logs')
+    .get()
+    .then(snapshot => {
+      if (snapshot.empty) {
+        console.log('No documents found');
+        return;
+      }
+      const deletePromises = [];
+      snapshot.forEach(doc => {
+        console.log(`Attempting to delete document ID: ${doc.id}`);
+        deletePromises.push(
+          db
+            .collection('logs')
             .doc(doc.id)
             .delete()
             .then(() => {
-              console.log('Document successfully deleted!');
+              console.log(`Document ID ${doc.id} successfully deleted!`);
             })
             .catch(error => {
-              console.error('Error removing document: ', error);
-            });
-        });
+              console.error(`Error removing document ID ${doc.id}: `, error);
+            })
+        );
       });
-    logBody.innerHTML = '';
-    addedLogs.clear();
-  });
-});
+      return Promise.all(deletePromises);
+    })
+    .then(() => {
+      console.log('All documents deleted, clearing UI');
+      logBody.innerHTML = '';
+      addedLogs.clear();
+    })
+    .catch(error => {
+      console.error('Error clearing logs: ', error);
+    });
+}
+
+window.clearLogs = clearLogs;
