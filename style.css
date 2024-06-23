@@ -72,6 +72,15 @@ body {
   margin-bottom: 2rem;
 }
 
+#mainContainer {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out; /* Adjust the duration as needed */
+}
+
+#mainContainer.show {
+  opacity: 1;
+}
+
 /* Media queries for responsive design */
 @media (max-width: 768px) {
   .header {

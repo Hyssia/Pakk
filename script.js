@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
       loginContainer.style.display = 'none';
       mainContainer.style.display = 'block';
       navContainer.style.display = 'block';
+      setTimeout(() => mainContainer.classList.add('show'), 10);
     } else {
       loginContainer.style.display = 'block';
       navContainer.style.display = 'none';
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       loginContainer.style.display = 'none';
       mainContainer.style.display = 'block';
       navContainer.style.display = 'block';
+      setTimeout(() => mainContainer.classList.add('show'), 10);
     } else {
       alert('Incorrect password');
     }
@@ -129,6 +131,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('outerHeadsBW').textContent = record['Outer Heads BW'];
                 document.getElementById('rollsPerPack').textContent = record['Rolls/Pack'];
                 document.getElementById('labels').textContent = record['Of labels'];
+
+                document.getElementById('importantEndBands').textContent = record['End Bands'];
+                document.getElementById('importantStropper').textContent = record['Straps'];
+                document.getElementById('importantPall').textContent = record['Rolls/Pack'];
 
                 updateChart(record);
               } else {
