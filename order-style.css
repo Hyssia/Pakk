@@ -1,0 +1,25 @@
+.order-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+.order-item.selected {
+  background-color: #d1e7dd;
+}
+.order-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.order-list .col-6 {
+  flex: 0 0 30%;
+  max-width: 39%;
+}
+.confirm-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
