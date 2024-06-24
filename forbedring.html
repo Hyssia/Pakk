@@ -28,10 +28,13 @@
   <body>
     <div class="nav-bar" id="navContainer">
       <div class="dropdown">
-        <a href="#" id="homeIcon">
+        <a href="#" id="homeIcon" class="dropdown-toggle" data-toggle="dropdown">
           <i class="fas fa-home"></i>
         </a>
         <span class="d_style">|</span> <span class="title_style">PM5 Dashboard</span> <span class="d_style">|</span>
+        <div class="dropdown-menu">
+          <a class="dropdown-item nav-link text-dark" href="index.html" data-target="mainContainer">Tilbake</a>
+        </div>
       </div>
     </div>
 
@@ -47,41 +50,19 @@
       <button id="loginButton" class="btn btn-dark">Login</button>
     </div>
 
-    <div class="container d-flex justify-content-center align-items-center" id="mainContainer" style="min-height: 100vh">
-      <div class="row">
-        <div class="col-6 col-md-3 mb-1">
-          <a href="pakk_app.html" class="card text-center">
-            <img src="img/cardicon (1).png" class="card-img-top" alt="Image 1" />
-            <div class="card-body">
-              <h5 class="card-title">PakkID Søk</h5>
-            </div>
-          </a>
+    <div class="container" id="mainContainer" style="min-height: 100vh">
+      <div class="header"><h1>Send forbedringsforslag</h1></div>
+      <form id="contactForm" action="https://formspree.io/f/mqazzzgy" method="POST">
+        <div class="form-group">
+          <label for="skiftlag">Skiftlag:</label>
+          <input type="text" id="skiftlag" name="skiftlag" class="form-control" required />
         </div>
-        <div class="col-6 col-md-3 mb-1">
-          <a href="rems_app.html" class="card text-center">
-            <img src="img/cardicon (2).png" class="card-img-top" alt="Image 2" />
-            <div class="card-body">
-              <h5 class="card-title">Rems utskudd</h5>
-            </div>
-          </a>
+        <div class="form-group">
+          <label for="improvement">Improvement Suggestion:</label>
+          <textarea id="improvement" name="improvement" class="form-control" required></textarea>
         </div>
-        <div class="col-6 col-md-3 mb-1 disabled">
-          <a href="forbedring.html" class="card text-center">
-            <img src="img/cardicon (3).png" class="card-img-top" alt="Image 3" />
-            <div class="card-body">
-              <h5 class="card-title">Forbedring</h5>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-3 mb-1">
-          <a href="order-form.html" class="card text-center">
-            <img src="img/cardicon (4).png" class="card-img-top" alt="Image 4" />
-            <div class="card-body">
-              <h5 class="card-title">Rekvisitt bestilling</h5>
-            </div>
-          </a>
-        </div>
-      </div>
+        <button type="submit" class="btn btn-dark">Send</button>
+      </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

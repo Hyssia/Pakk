@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PM5 Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+FR+Moderne:wght@100..400&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LT9ZRFRQC"></script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-2LT9ZRFRQC');
+    </script>
+  </head>
+  <body>
+    <div class="nav-bar" id="navContainer">
+      <div class="dropdown">
+        <a href="#" id="homeIcon" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-home"></i>
+        </a>
+        <span class="d_style">|</span> <span class="title_style">PM5 Dashboard</span> <span class="d_style">|</span>
+        <div class="dropdown-menu">
+          <a class="dropdown-item nav-link text-dark" href="index.html" data-target="mainContainer">Tilbake</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="loginContainer" style="display: none">
+      <div class="header">
+        <h1>Login</h1>
+        <img src="img/Blod.png" alt="" id="loginLogo" style="width: 15rem" />
+      </div>
+      <div class="form-group">
+        <label for="passwordInput">Password:</label>
+        <input type="password" id="passwordInput" class="form-control" />
+      </div>
+      <button id="loginButton" class="btn btn-dark">Login</button>
+    </div>
+
+    <div class="container border" id="mainContainer">
+      <div class="header">
+        <h1>Pakk Spesifikasjoner</h1>
+        <img src="img/Blod.png" alt="Logo" id="hLogo" style="width: 15rem" />
+      </div>
+      <div class="form-group">
+        <label for="codeInput">Enter PAKK ID:</label>
+        <input type="text" id="codeInput" class="form-control" maxlength="5" />
+      </div>
+      <p id="description" class="font-weight-bold"></p>
+      <p id="kolonne" class="font-weight-bold"></p>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Inner heads</th>
+              <th scope="col">Outer heads</th>
+              <th scope="col">Center Tape</th>
+              <th scope="col">End Tape</th>
+              <th scope="col">of Wraps</th>
+              <th scope="col">Straps</th>
+              <th scope="col">Wrap BW</th>
+              <th scope="col">Heads BW</th>
+              <th scope="col">Inner heads BW</th>
+              <th scope="col">Outer heads BW</th>
+              <th scope="col">Rolls/Pack</th>
+              <th scope="col">Of labels</th>
+            </tr>
+          </thead>
+          <tbody id="infoTable">
+            <tr>
+              <td id="innerHeads">0</td>
+              <td id="outerHeads">0</td>
+              <td id="centerBands">0</td>
+              <td id="endBands">0</td>
+              <td id="wraps">0</td>
+              <td id="straps">0</td>
+              <td id="wrapBW">0</td>
+              <td id="headsBW">0</td>
+              <td id="innerHeadsBW">0</td>
+              <td id="outerHeadsBW">0</td>
+              <td id="rollsPerPack">0</td>
+              <td id="labels">0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr class="my-4" />
+
+      <div class="d-flex justify-content-around">
+        <h2 class="bigDisplay">Endetape: <span id="importantEndBands">0</span></h2>
+        <h2 class="bigDisplay">Stropper: <span id="importantStropper">0</span></h2>
+        <h2 class="bigDisplay">Rems per pall: <span id="importantPall">0</span></h2>
+      </div>
+
+      <canvas id="myChart" width="400" height="150"></canvas>
+    </div>
+
+    <div class="container" id="feature1Container" style="display: none">
+      <h1>Hvordan hente Pakk ID</h1>
+      <p>Hent Pakk ID fra kjøreordrespesifikasjoner</p>
+
+      <div class="container-fluid">
+        <img src="1.png" alt="instructions1" style="width: 70rem" />
+        <img src="2.png" alt="instructions2" style="width: 70rem" />
+      </div>
+    </div>
+
+    <div class="container" id="feature2Container" style="display: none">
+      <h1>Send forbedringsforslag</h1>
+      <form id="contactForm" action="https://formspree.io/f/mqazzzgy" method="POST">
+        <div class="form-group">
+          <label for="skiftlag">Skiftlag:</label>
+          <input type="text" id="skiftlag" name="skiftlag" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="improvement">Improvement Suggestion:</label>
+          <textarea id="improvement" name="improvement" class="form-control" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>

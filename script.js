@@ -83,20 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', function (event) {
-      event.preventDefault();
-      const target = link.getAttribute('data-target');
-      document.querySelectorAll('.container').forEach(container => {
-        if (container.id === target) {
-          container.style.display = 'block';
-        } else {
-          container.style.display = 'none';
-        }
-      });
-    });
-  });
-
   const codeInput = document.getElementById('codeInput');
   if (codeInput) {
     codeInput.addEventListener('input', function () {
