@@ -102,6 +102,25 @@ body {
 .card-title {
   margin: 0;
 }
+header {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 5rem; /* Adjust this value to move the logo up or down */
+}
+
+header .indexLogo {
+  width: 20rem; /* Adjust the size of the logo as needed */
+}
+
+.custom-margin {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Ensure relative positioning for the container */
+  margin-top: -2rem !important;
+}
 
 /* Media queries for responsive design */
 @media (max-width: 768px) {
@@ -160,5 +179,8 @@ body {
 
   #hLogo {
     display: none;
+  }
+  .custom-margin {
+    margin-top: 2rem;
   }
 }
