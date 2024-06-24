@@ -86,8 +86,8 @@ body {
   margin: 0 1px;
   text-decoration: none;
   color: black;
-  border: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Add soft box shadow */
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 .card img {
   height: 150px;
@@ -120,6 +120,14 @@ header .indexLogo {
   justify-content: center;
   position: relative; /* Ensure relative positioning for the container */
   margin-top: -2rem !important;
+}
+
+.indexTitle {
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: uppercase;
+  font-size: 1.3rem;
 }
 
 /* Media queries for responsive design */
@@ -182,5 +190,11 @@ header .indexLogo {
   }
   .custom-margin {
     margin-top: 2rem;
+  }
+}
+
+@media only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
+  .indexLogo {
+    width: 10rem;
   }
 }
