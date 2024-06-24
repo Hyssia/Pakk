@@ -2,12 +2,6 @@ body {
   padding-top: 50px;
 }
 
-html,
-body {
-  overflow: hidden;
-  height: 100%;
-}
-
 .nav-bar {
   position: fixed;
   top: 0;
