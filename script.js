@@ -34,10 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
       loginContainer.style.display = 'none';
       // iTitle.style.display = 'block';
       // iLogo.style.display = 'block';
+      mainContainer.style.display = 'block';
+      navContainer.style.display = 'block';
       headerContainer.style.display = 'block';
-      mainContainer.style.display = 'relative';
-      navContainer.style.display = 'relative';
-      setTimeout(() => mainContainer.classList.add('show'), 10);
     } else {
       loginContainer.style.display = 'block';
       navContainer.style.display = 'none';

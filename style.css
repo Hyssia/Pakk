@@ -73,15 +73,6 @@ body {
   margin-bottom: 2rem;
 }
 
-#mainContainer {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out; /* Adjust the duration as needed */
-}
-
-#mainContainer.show {
-  opacity: 1;
-}
-
 .card {
   margin: 0 1px;
   text-decoration: none;
@@ -119,7 +110,7 @@ header .indexLogo {
   align-items: center;
   justify-content: center;
   position: relative; /* Ensure relative positioning for the container */
-  margin-top: -2rem !important;
+  margin-top: -3rem !important;
 }
 
 .indexTitle {
@@ -178,7 +169,7 @@ header .indexLogo {
     font-size: 1.1rem;
   }
   .indexLogo {
-    width: 15rem !important;
+    display: none;
   }
 }
 
@@ -196,11 +187,5 @@ header .indexLogo {
   }
   .custom-margin {
     margin-top: 2rem;
-  }
-}
-
-@media only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
-  .indexLogo {
-    width: 8rem !important;
   }
 }
