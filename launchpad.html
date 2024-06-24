@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PM5 Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LT9ZRFRQC"></script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-2LT9ZRFRQC');
+    </script>
+  </head>
+  <body>
+    <div class="nav-bar" id="navContainer">
+      <div class="dropdown">
+        <a href="#" id="homeIcon">
+          <i class="fas fa-home"></i>
+        </a>
+        <span class="d_style">|</span> <span class="title_style">PM5 Dashboard</span> <span class="d_style">|</span>
+      </div>
+    </div>
+
+    <header class="headerContainer" id="headerContainer">
+      <img src="img/Blod.png" alt="" class="indexLogo" id="iLogo" />
+      <h3 class="indexTitle" id="iTitle">Launchpad</h3>
+    </header>
+    <div
+      class="container d-flex justify-content-center align-items-center custom-margin"
+      id="mainContainer"
+      style="min-height: 100vh"
+    >
+      <div class="row">
+        <div class="col-6 col-md-3 mb-1">
+          <a href="pakk_app.html" class="card text-center">
+            <img src="img/cardicon (1).png" class="card-img-top" alt="Image 1" />
+            <div class="card-body">
+              <h5 class="card-title">PakkID Søk</h5>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-3 mb-1">
+          <a href="rems_app.html" class="card text-center">
+            <img src="img/cardicon (2).png" class="card-img-top" alt="Image 2" />
+            <div class="card-body">
+              <h5 class="card-title">Rems utskudd</h5>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-3 mb-1 disabled">
+          <a href="forbedring.html" class="card text-center">
+            <img src="img/cardicon (3).png" class="card-img-top" alt="Image 3" />
+            <div class="card-body">
+              <h5 class="card-title">Forbedring</h5>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-3 mb-1">
+          <a href="order-form.html" class="card text-center">
+            <img src="img/cardicon (4).png" class="card-img-top" alt="Image 4" />
+            <div class="card-body">
+              <h5 class="card-title">Rekvisitt bestilling</h5>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script src="login.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
