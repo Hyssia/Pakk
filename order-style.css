@@ -1,10 +1,11 @@
-.order-item {
+/* .order-item {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 5px;
   text-align: center;
   cursor: pointer;
   background-color: #f9f9f9;
+  z-index: 0;
 }
 .order-item.selected {
   background-color: #d1e7dd;
@@ -16,10 +17,44 @@
 .order-list .col-6 {
   flex: 0 0 30%;
   max-width: 39%;
-}
+} */
 .confirm-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+  padding: 10px;
+  background-color: white; /* Optional: to ensure the button doesn't overlap with content */
+  z-index: 1000; /* To make sure it stays on top */
+}
+.accessory-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Adjust the gap between the boxes as needed */
+}
+
+.accessory-grid .order-item {
+  flex: 0 1 calc(50% - 10px); /* 2 columns, accounting for the gap */
+  min-width: calc(50% - 10px); /* Ensure boxes are half the width minus the gap */
+  padding: 20px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.accessory-grid .order-item.selected {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+@media (max-width: 576px) {
+  .accessory-grid .order-item {
+    flex: 0 1 100%; /* Stack items vertically on small screens */
+    min-width: 100%;
+  }
 }

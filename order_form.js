@@ -1,17 +1,50 @@
 document.addEventListener('DOMContentLoaded', function () {
-  emailjs.init('service_nwk3zar');
+  emailjs.init('kTxbCZwkJn02xTAyI');
 
   const accessories = [
-    'Accessory 1',
-    'Accessory 2',
-    'Accessory 3',
-    'Accessory 4',
-    'Accessory 5',
-    'Accessory 6',
-    'Accessory 7',
-    'Accessory 8',
-    'Accessory 9',
-    'Accessory 10',
+    'Dobbeltsidig teip gul',
+    'Brunteip',
+    'Glassfiberteip',
+    'Rød Trialteip',
+    'Blank teip til rondeller',
+    'Teipdispenser til glassfiberteip',
+    'Teip til IBS',
+    'Små etiketter',
+    'Karbonbånd',
+    'Knivblad; Små',
+    'Knivblad; Store',
+    'Stifter til stiftepistol',
+    'Ploger',
+    'Kiler; Små',
+    'Kiler; Store',
+    'Rød spraymaling',
+    'Arbeidshansker; Str. 8',
+    'Arbeidshansker; Str. 10',
+    'Arbeidshansker; Str. 11',
+    'Tykkhansker',
+    'Fargestifter',
+    'Plastsekker',
+    'Papirsekker',
+    'IBS-bånd',
+    'Målbånd; 5m',
+    'Kritt(hvitt)',
+    'Overkniver til RM',
+    'Støvmasker',
+    'Snortau',
+    'Filterkaffe',
+    'Pulverkaffe',
+    'Kakao',
+    'Kaffefilter',
+    'Rens til kaffetrakter',
+    'Kniver',
+    'Gafler',
+    'Skjeer',
+    'Kopper',
+    'Papptallerkener',
+    'Såpe; Blå',
+    'Såpe; Grov',
+    'Zalo',
+    'Tørkepapir (rull)',
   ];
 
   const orderList = document.getElementById('orderList');
@@ -50,11 +83,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   sendOrderButton.addEventListener('click', function () {
     const emailParams = {
-      to_name: 'Prop Storage',
+      to_name: 'Rekvisitt',
+      to_email: 'andershbredesen@gmail.com', // Add this line to specify recipient email
       message: Array.from(selectedItems).join(', '),
     };
 
-    emailjs.send('service_nwk3zar', 'service_nwk3zar', emailParams).then(
+    emailjs.send('service_nwk3zar', 'template_ufu8u4p', emailParams).then(
       function (response) {
         console.log('SUCCESS!', response.status, response.text);
         alert('Order sent successfully!');

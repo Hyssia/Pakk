@@ -52,14 +52,19 @@
       <button id="loginButton" class="btn btn-dark">Login</button>
     </div>
 
-    <div class="container border" id="mainContainer">
-      <h2>Order Form</h2>
-      <div class="order-list row" id="orderList">
-        <!-- Dynamically generated order items will go here -->
+    <div class="container" id="mainContainer">
+      <div class="header"></div>
+      <h1>Rekvisitt bestilling</h1>
+    </div>
+    <form id="logForm" onsubmit="return false;">
+      <div class="accessory-grid" id="orderList">
+        <!-- Accessories will be appended here -->
       </div>
-      <div class="confirm-container">
-        <button class="btn btn-primary" id="confirmButton">Confirm</button>
+    </form>
       </div>
+      <div class="confirm-container align-items-end">
+        <button class="btn btn-dark" id="confirmButton">Confirm</button>
+      </div> 
     </div>
 
     <!-- Modal -->
