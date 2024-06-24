@@ -129,6 +129,9 @@ header .indexLogo {
   text-transform: uppercase;
   font-size: 1.3rem;
 }
+.indexLogo {
+  width: 20rem !important;
+}
 
 /* Media queries for responsive design */
 @media (max-width: 768px) {
@@ -174,6 +177,9 @@ header .indexLogo {
   .bigDisplay {
     font-size: 1.1rem;
   }
+  .indexLogo {
+    width: 15rem !important;
+  }
 }
 
 @media (max-width: 576px) {
@@ -195,6 +201,6 @@ header .indexLogo {
 
 @media only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
   .indexLogo {
-    width: 10rem;
+    width: 8rem !important;
   }
 }
