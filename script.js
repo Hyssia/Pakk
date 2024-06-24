@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const loginContainer = document.getElementById('loginContainer');
   const mainContainer = document.getElementById('mainContainer');
   const navContainer = document.getElementById('navContainer');
-  const feature1Container = document.getElementById('feature1Container');
-  const feature2Container = document.getElementById('feature2Container');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const iTitle = document.getElementById('iTitle');
+  const iLogo = document.getElementById('iLogo');
+  const headerContainer = document.getElementById('headerContainer');
 
   // Function to set a cookie
   function setCookie(name, value, days) {
@@ -32,13 +32,19 @@ document.addEventListener('DOMContentLoaded', function () {
   function checkLogin() {
     if (getCookie('loggedIn') === 'true') {
       loginContainer.style.display = 'none';
-      mainContainer.style.display = 'block';
-      navContainer.style.display = 'block';
+      // iTitle.style.display = 'block';
+      // iLogo.style.display = 'block';
+      headerContainer.style.display = 'block';
+      mainContainer.style.display = 'relative';
+      navContainer.style.display = 'relative';
       setTimeout(() => mainContainer.classList.add('show'), 10);
     } else {
       loginContainer.style.display = 'block';
       navContainer.style.display = 'none';
       mainContainer.style.display = 'none';
+      headerContainer.style.display = 'none';
+      // iTitle.style.display = 'none';
+      // iLogo.style.display = 'none';
     }
   }
 
@@ -63,6 +69,9 @@ document.addEventListener('DOMContentLoaded', function () {
       loginContainer.style.display = 'none';
       mainContainer.style.display = 'block';
       navContainer.style.display = 'block';
+      headerContainer.style.display = 'block';
+      // iTitle.style.display = 'relative';
+      // iLogo.style.display = 'relative';
       setTimeout(() => mainContainer.classList.add('show'), 10);
     } else {
       alert('Incorrect password');

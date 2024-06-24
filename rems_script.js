@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
       orderNumber: orderNumber.value,
       format: format.value,
       sum: sumField.value,
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toLocaleString(),
     };
 
     db.collection('logs')
