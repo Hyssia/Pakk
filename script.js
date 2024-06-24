@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+  console.log('DOM loaded');
+
   const loginButton = document.getElementById('loginButton');
   const passwordInput = document.getElementById('passwordInput');
   const loginContainer = document.getElementById('loginContainer');
