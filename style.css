@@ -79,7 +79,15 @@ body {
   color: black;
   border: none !important;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-decoration: none !important;
+  transition: box-shadow 0.3s ease;
 }
+
+a.card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  color: inherit;
+}
+
 .card img {
   height: 150px;
   object-fit: cover;
@@ -123,7 +131,6 @@ header .indexLogo {
 .indexLogo {
   width: 20rem !important;
 }
-
 /* Media queries for responsive design */
 @media (max-width: 768px) {
   .header {

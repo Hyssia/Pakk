@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const passwordInput = document.getElementById('passwordInput');
   const loginContainer = document.getElementById('loginContainer');
 
+  document.getElementById('passwordInput').focus();
+
   function handleLogin() {
     const password = passwordInput.value;
     if (password === 'Ranheim') {
