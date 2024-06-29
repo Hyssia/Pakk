@@ -91,6 +91,7 @@ a.card:hover {
 .card img {
   height: 150px;
   object-fit: cover;
+  width: 100%;
 }
 .card-body {
   display: flex;
@@ -177,6 +178,15 @@ header .indexLogo {
   }
   .indexLogo {
     display: none;
+  }
+  .card-body {
+    height: 60px;
+  }
+  .card img {
+    height: 120px;
+  }
+  .card-title {
+    font-size: 1rem;
   }
 }
 
