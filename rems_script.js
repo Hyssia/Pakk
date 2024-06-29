@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const orderNumber = document.getElementById('orderNumber');
   const format = document.getElementById('format');
+  const lockFormatCheckbox = document.getElementById('lockFormat');
   const remsOut = document.getElementById('remsOut');
   const increment = document.getElementById('increment');
   const decrement = document.getElementById('decrement');
@@ -37,6 +38,16 @@ document.addEventListener('DOMContentLoaded', function () {
       value = value.slice(0, 2) + ',' + value.slice(2); // Insert comma at the third position
     }
     e.target.value = value;
+  });
+
+  lockFormatCheckbox.addEventListener('change', function () {
+    if (this.checked) {
+      format.disabled = true;
+      format.style.pointerEvents = 'none';
+    } else {
+      format.disabled = false;
+      format.style.pointerEvents = 'auto';
+    }
   });
 
   function fetchLogs() {
@@ -106,7 +117,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function resetForm() {
     orderNumber.value = '';
-    format.value = '';
+    if (!lockFormatCheckbox.checked) {
+      format.value = '';
+    }
     remsOut.value = 0;
     sumField.value = 0;
     remsOutValue = 0;
