@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   console.log('Script loaded and DOM fully loaded');
 
-  const addedLogs = new Set();
-
   // Firebase configuration
   //   const firebaseConfig = {
   //     apiKey: 'AIzaSyAvaXLxAX580y8HfF_Vp4blHsm_b1notvU',
@@ -32,6 +30,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let remsOutValue = 0;
   let sumValue = 0;
+
+  document.getElementById('format').addEventListener('input', function (e) {
+    let value = e.target.value.replace(',', ''); // Remove any existing commas
+    if (value.length > 2) {
+      value = value.slice(0, 2) + ',' + value.slice(2); // Insert comma at the third position
+    }
+    e.target.value = value;
+  });
 
   function fetchLogs() {
     db.collection('logs')
@@ -88,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .add(logData)
       .then(docRef => {
         console.log('Document written with ID: ', docRef.id);
-        appendLog(logData);
+        // appendLog(logData);
         resetForm();
       })
       .catch(error => {
@@ -96,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 
-  resetLog.addEventListener('click', resetForm);
+  // resetLog.addEventListener('click', resetForm);
 
   function resetForm() {
     orderNumber.value = '';
@@ -113,12 +119,12 @@ document.addEventListener('DOMContentLoaded', function () {
     addedLogs.add(docId);
     const row = document.createElement('tr');
     row.innerHTML = `
-        <td>${logData.orderNumber}</td>
-        <td>${logData.format}</td>
-        <td>${logData.sum}</td>
-        <td>${logData.timestamp}</td>
-      `;
-    logBody.appendChild(row);
+      <td>${logData.orderNumber}</td>
+      <td>${logData.format}</td>
+      <td>${logData.sum}</td>
+      <td>${logData.timestamp}</td>
+    `;
+    logBody.insertBefore(row, logBody.firstChild); // Prepend new log
   }
 
   //   db.collection('logs').onSnapshot(snapshot => {
@@ -129,23 +135,42 @@ document.addEventListener('DOMContentLoaded', function () {
   //     });
   //   });
 
-  db.collection('logs').onSnapshot(snapshot => {
-    snapshot.docChanges().forEach(change => {
-      if (change.type === 'added') {
-        appendLog(change.doc.data(), change.doc.id);
-      } else if (change.type === 'removed') {
-        const rows = logBody.getElementsByTagName('tr');
-        for (let i = 0; i < rows.length; i++) {
-          const row = rows[i];
-          if (row.cells[3].innerText === change.doc.data().timestamp) {
-            logBody.removeChild(row);
-            addedLogs.delete(change.doc.id); // Remove from the set
-            break;
+  // db.collection('logs').onSnapshot(snapshot => {
+  //   snapshot.docChanges().forEach(change => {
+  //     if (change.type === 'added') {
+  //       appendLog(change.doc.data(), change.doc.id);
+  //     } else if (change.type === 'removed') {
+  //       const rows = logBody.getElementsByTagName('tr');
+  //       for (let i = 0; i < rows.length; i++) {
+  //         const row = rows[i];
+  //         if (row.cells[3].innerText === change.doc.data().timestamp) {
+  //           logBody.removeChild(row);
+  //           addedLogs.delete(change.doc.id); // Remove from the set
+  //           break;
+  //         }
+  //       }
+  //     }
+  //   });
+  // });
+  db.collection('logs')
+    .orderBy('timestamp', 'desc')
+    .onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(change => {
+        if (change.type === 'added') {
+          appendLog(change.doc.data(), change.doc.id);
+        } else if (change.type === 'removed') {
+          const rows = logBody.getElementsByTagName('tr');
+          for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            if (row.cells[3].innerText === change.doc.data().timestamp) {
+              logBody.removeChild(row);
+              addedLogs.delete(change.doc.id);
+              break;
+            }
           }
         }
-      }
+      });
     });
-  });
 
   //   clearLog.addEventListener('click', () => {
   //     console.log('Clear logs button clicked');
@@ -184,7 +209,6 @@ document.addEventListener('DOMContentLoaded', function () {
   //       });
   //   });
 });
-
 const firebaseConfig = {
   apiKey: 'AIzaSyAvaXLxAX580y8HfF_Vp4blHsm_b1notvU',
   authDomain: 'pm5dashboard.firebaseapp.com',
@@ -198,6 +222,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
+
+const addedLogs = new Set();
 
 function clearLogs() {
   console.log('Clear logs button clicked');
