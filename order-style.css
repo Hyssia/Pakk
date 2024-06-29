@@ -51,10 +51,16 @@
   background-color: #d4edda;
   border-color: #c3e6cb;
 }
+#annetButton {
+  margin-left: 6rem !important;
+}
 
 @media (max-width: 576px) {
   .accessory-grid .order-item {
     flex: 0 1 calc(50% - 10px);
     min-width: calc(50% - 10px);
+  }
+  #annetButton {
+    margin-left: 1rem !important;
   }
 }

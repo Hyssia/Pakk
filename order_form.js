@@ -53,6 +53,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const orderSummary = document.getElementById('orderSummary');
   const sendOrderButton = document.getElementById('sendOrderButton');
 
+  const addCustomOrderButton = document.getElementById('addCustomOrderButton');
+  const customOrderInput = document.getElementById('customOrderInput');
+  const annetButton = document.getElementById('annetButton');
+  const customOrderModal = new bootstrap.Modal(document.getElementById('customOrderModal'));
+
   let selectedItems = new Set();
 
   accessories.forEach(accessory => {
@@ -71,6 +76,19 @@ document.addEventListener('DOMContentLoaded', function () {
     orderList.appendChild(itemDiv);
   });
 
+  annetButton.addEventListener('click', function () {
+    customOrderModal.show();
+  });
+
+  addCustomOrderButton.addEventListener('click', function () {
+    const customOrder = customOrderInput.value.trim();
+    if (customOrder) {
+      selectedItems.add(customOrder);
+      customOrderInput.value = '';
+      customOrderModal.hide();
+    }
+  });
+
   confirmButton.addEventListener('click', function () {
     orderSummary.innerHTML = '';
     selectedItems.forEach(item => {
@@ -84,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
   sendOrderButton.addEventListener('click', function () {
     const emailParams = {
       to_name: 'Rekvisitt',
-      to_email: 'andershbredesen@gmail.com', // Add this line to specify recipient email
       message: Array.from(selectedItems).join(', '),
     };
 
