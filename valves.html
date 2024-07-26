@@ -39,71 +39,95 @@
       </div>
     </div>
 
-    <div class="container" id="mainContainer">
-      <div class="header"></div>
-      <h1 class="text-center">Rekvisitt bestilling</h1>
-    </div>
-    <form id="logForm" onsubmit="return false;">
-      <div class="accessory-grid" id="orderList">
-        <!-- Accessories will be appended here -->
-      </div>
-      
-    </form>
-      </div>
-      <div class="confirm-container align-items-end">
-        <button class="btn btn-dark" id="confirmButton">Confirm</button>
-        <button type="button" class="btn btn-secondary" id="annetButton">Annet</button>
-      </div> 
-    </div>
+    <div class="container">
+        <h1 class="mt-3 valveTitle text-center">Ventilkart</h1>
 
+        <hr class="my-4" />
 
+        <div class="d-flex justify-content-between mb-3">
+          <button class="btn btn-danger" id="clearButton">Clear List</button>
+          <button class="btn btn-secondary" id="addCustomValveButton" data-toggle="modal" data-target="#customValveModal">
+            Add Custom Valve
+          </button>
+        </div>
+        
+        
+        
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <h2 class="text-center valveHeader">Kort Stopp</h2>
+            <hr class="my-4" />
+            <div class="row" id="shortStopValveList"></div>
+          </div>
+          
+  
+          <div class="col-12">
+            <hr class="my-4" />
+            <h2 class="text-center valveHeader">Lang Stopp</h2>
+            <hr class="my-4" />
+            <div class="row" id="longStopValveList"></div>
+          </div>
+        </div>
 
-
-<!-- Annet modal -->
-    <div class="modal fade" id="customOrderModal" tabindex="-1" role="dialog" aria-labelledby="customOrderModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="customValveModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="customValveModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="customOrderModalLabel">Annet</h5>
+            <h5 class="modal-title" id="customValveModalLabel">Add Custom Valve</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label for="customOrderInput">Legg til bestilling:</label>
-              <input type="text" id="customOrderInput" class="form-control" />
+              <label for="customValveInput">Valve Name</label>
+              <input type="text" class="form-control" id="customValveInput" />
+            </div>
+            <div class="form-group">
+              <label for="valveSectionSelect">Section</label>
+              <select class="form-control" id="valveSectionSelect">
+                <option value="shortStop">Short Stop</option>
+                <option value="longStop">Long Stop</option>
+              </select>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" id="addCustomOrderButton">Add</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveCustomValveButton">Save Valve</button>
           </div>
         </div>
       </div>
     </div>
 
-
-    <!--Confirm Modal -->
-    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <!-- Clear Confirmation Modal -->
+    <div class="modal fade" id="clearModal" tabindex="-1" role="dialog" aria-labelledby="clearModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="orderModalLabel">Confirm Order</h5>
+            <h5 class="modal-title" id="clearModalLabel">Confirm Clear List</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body" id="orderSummary">
-            <!-- Order summary will be populated here -->
-          </div>
+          <div class="modal-body">Are you sure you want to clear the list?</div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" id="sendOrderButton">Send</button>
+            <button type="button" class="btn btn-primary" id="confirmClearButton">Clear List</button>
           </div>
         </div>
       </div>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -111,6 +135,6 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
     <script src="script.js"></script>
-    <script src="order_form.js"></script>
+    <script src="valve_script.js"></script>
   </body>
 </html>

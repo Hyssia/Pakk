@@ -81,6 +81,7 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-decoration: none !important;
   transition: box-shadow 0.3s ease;
+  width: 14rem;
 }
 
 a.card:hover {
@@ -89,28 +90,28 @@ a.card:hover {
 }
 
 .card img {
-  height: 150px;
-  object-fit: cover;
+  height: 180px;
+  object-fit: fill;
   width: 100%;
 }
 .card-body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  height: 4rem;
 }
 .card-title {
   margin: 0;
 }
 header {
-  position: absolute;
+  display: flex;
   width: 100%;
   text-align: center;
-  top: 5rem; /* Adjust this value to move the logo up or down */
+  top: 5rem;
 }
 
 header .indexLogo {
-  width: 20rem; /* Adjust the size of the logo as needed */
+  width: 25rem;
 }
 
 .custom-margin {
@@ -119,7 +120,7 @@ header .indexLogo {
   align-items: center;
   justify-content: center;
   position: relative; /* Ensure relative positioning for the container */
-  margin-top: -3rem !important;
+  margin-top: -7rem !important;
 }
 
 .indexTitle {
@@ -132,6 +133,26 @@ header .indexLogo {
 .indexLogo {
   width: 20rem !important;
 }
+
+.valveTitle {
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+.valveHeader {
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+#shortStopValveList,
+#longStopValveList {
+  font-size: 1.1rem;
+}
+
+.launchpadLine {
+  box-shadow: 0 123123px 15px -123px rgba(0, 0, 0, 1, 1);
+}
+
 /* Media queries for responsive design */
 @media (max-width: 768px) {
   .header {
@@ -187,6 +208,9 @@ header .indexLogo {
   }
   .card-title {
     font-size: 1rem;
+  }
+  .card {
+    width: 10rem;
   }
 }
 
