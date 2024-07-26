@@ -208,6 +208,12 @@ header .indexLogo {
   .card {
     width: 10rem;
   }
+  .custom-margin {
+    margin-top: -7rem !important;
+  }
+  .indexTitle {
+    margin-top: 1.2rem;
+  }
 }
 
 @media (max-width: 576px) {
