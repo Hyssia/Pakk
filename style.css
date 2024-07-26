@@ -120,7 +120,7 @@ header .indexLogo {
   align-items: center;
   justify-content: center;
   position: relative; /* Ensure relative positioning for the container */
-  margin-top: -7rem !important;
+  margin-top: -13rem !important;
 }
 
 .indexTitle {
@@ -147,10 +147,6 @@ header .indexLogo {
 #shortStopValveList,
 #longStopValveList {
   font-size: 1.1rem;
-}
-
-.launchpadLine {
-  box-shadow: 0 123123px 15px -123px rgba(0, 0, 0, 1, 1);
 }
 
 /* Media queries for responsive design */
