@@ -72,6 +72,14 @@ document.addEventListener('DOMContentLoaded', function () {
   let comments = { shortStop: {}, longStop: {}, custom: {} };
   let lockIds = { shortStop: {}, longStop: {}, custom: {} };
 
+  function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = (Math.random() * 16) | 0,
+        v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+
   function renderValves(valveListElement, valves, category) {
     valveListElement.innerHTML = '';
     valves.forEach((valve, index) => {
@@ -131,6 +139,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function saveSelectedValves() {
+    const customValveNames = {};
+    selectedValves.custom.forEach(valveId => {
+      const valveElement = document.querySelector(`[data-valve-id="${valveId}"]`);
+      if (valveElement) {
+        customValveNames[valveId] = valveElement.textContent;
+      }
+    });
+
     db.collection('valveStatus')
       .doc('currentStatus')
       .set({
@@ -139,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
         custom: Array.from(selectedValves.custom),
         comments: comments,
         lockIds: lockIds,
+        customValveNames: customValveNames,
       })
       .catch(error => {
         console.error('Error saving selected valves: ', error);
@@ -159,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
           lockIds = data.lockIds || { shortStop: {}, longStop: {}, custom: {} };
           renderValves(shortStopValveList, valveData.shortStop, 'shortStop');
           renderValves(longStopValveList, valveData.longStop, 'longStop');
-          renderValvesFromCustom(data.custom || []);
+          renderValvesFromCustom(data.customValveNames || {});
         }
       })
       .catch(error => {
@@ -167,10 +184,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 
-  function renderValvesFromCustom(customValves) {
-    customValves.forEach(valveId => {
-      const [category, ...valveArray] = valveId.split('-');
-      const valveName = valveArray.join('-').replace('custom-', ''); // Remove 'custom-' from the valve name
+  function renderValvesFromCustom(customValveNames) {
+    Object.keys(customValveNames).forEach(valveId => {
+      const [category, custom, uuid] = valveId.split('-');
+      const valveName = customValveNames[valveId];
       addCustomValve(valveName, category, valveId);
     });
   }
@@ -178,22 +195,30 @@ document.addEventListener('DOMContentLoaded', function () {
   function addCustomValve(valveName, category, valveId = null) {
     const valveListElement = category === 'shortStop' ? shortStopValveList : longStopValveList;
     const valveItem = document.createElement('div');
-    valveItem.className = 'col-12 col-md-6 valve-item'; // Add col-12 for mobile and col-md-6 for larger screens
+    valveItem.className = 'valve-item';
     valveItem.textContent = valveName;
 
-    valveId = valveId || `${category}-custom-${valveName}`;
+    valveId = valveId || `${category}-custom-${generateUUID()}`;
+    valveItem.setAttribute('data-valve-id', valveId); // Add this line
+
     selectedValves.custom.add(valveId);
+    comments[category][valveId] = comments[category][valveId] || '';
+    lockIds[category][valveId] = lockIds[category][valveId] || '';
 
     const commentField = document.createElement('textarea');
     commentField.className = 'form-control mt-1 valve-comment';
     commentField.placeholder = 'Kommentar';
-    commentField.value = comments[category][valveId] || '';
+    commentField.value = comments[category][valveId];
 
     const lockIdField = document.createElement('input');
     lockIdField.className = 'form-control mt-1 valve-lock-id';
     lockIdField.type = 'number';
     lockIdField.placeholder = 'Lås ID';
-    lockIdField.value = lockIds[category][valveId] || '';
+    lockIdField.value = lockIds[category][valveId];
+
+    if (selectedValves.custom.has(valveId)) {
+      valveItem.classList.add('selected');
+    }
 
     valveItem.addEventListener('click', function () {
       if (selectedValves.custom.has(valveId)) {
@@ -217,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const containerDiv = document.createElement('div');
-    containerDiv.className = 'valve-container';
+    containerDiv.className = 'valve-container col-12 col-md-6';
     containerDiv.appendChild(valveItem);
 
     const commentLockContainer = document.createElement('div');
@@ -266,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // CSS for comment box and lock ID input
 const style = document.createElement('style');
 style.innerHTML = `
- .valve-container {
+  .valve-container {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
