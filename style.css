@@ -150,6 +150,15 @@ header .indexLogo {
 }
 
 /* Media queries for responsive design */
+@media (max-width: 990px) {
+  .card img {
+    height: 100px;
+  }
+  .card {
+    width: 9rem;
+  }
+}
+
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
