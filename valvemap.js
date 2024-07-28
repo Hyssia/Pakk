@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
     valveList.innerHTML = '';
     valves.forEach((valve, index) => {
       const valveItem = document.createElement('div');
-      valveItem.className = 'valve-item card mb-2';
+      valveItem.className = 'valve-item col-12 col-md-4 mb-3';
       valveItem.innerHTML = `
         <div class="card-body">
           <h5 class="card-title">${valve.valveName}</h5>
@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
       `;
       valveList.appendChild(valveItem);
     });
+    updateValveChangesIndicator();
   }
 
   window.openResetModal = function (index) {
@@ -100,17 +101,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('confirmResetButton').addEventListener('click', function () {
     const signature = document.getElementById('resetSignatureField').value;
-    if (signature.length === 2) {
-      valves[resetIndex].reset = true;
-      valves[resetIndex].resetSignature = signature.toUpperCase();
-      saveToFirebase();
-      renderValves();
-      resetModal.hide();
-      resetIndex = null;
-      document.getElementById('resetSignatureField').value = '';
-    } else {
-      alert('Please enter a valid 2-digit signature.');
-    }
+    valves[resetIndex].reset = true;
+    valves[resetIndex].resetSignature = signature.toUpperCase();
+    saveToFirebase();
+    renderValves();
+    resetModal.hide();
+    resetIndex = null;
+    document.getElementById('resetSignatureField').value = '';
   });
 
   function saveToFirebase() {
@@ -201,11 +198,95 @@ document.addEventListener('DOMContentLoaded', function () {
     suggestionsContainer.style.display = 'block';
   });
 
+  valveNameInput.addEventListener('input', function () {
+    const input = valveNameInput.value.toLowerCase();
+    suggestionsContainer.innerHTML = ''; // Clear existing suggestions
+
+    if (input.length > 0) {
+      const filteredOptions = valveOptions.filter(option => option.toLowerCase().includes(input));
+
+      filteredOptions.forEach(option => {
+        const suggestionItem = document.createElement('div');
+        suggestionItem.className = 'dropdown-item';
+        suggestionItem.textContent = option;
+        suggestionItem.addEventListener('click', function () {
+          valveNameInput.value = option;
+          suggestionsContainer.innerHTML = '';
+          suggestionsContainer.style.display = 'none';
+        });
+        suggestionsContainer.appendChild(suggestionItem);
+      });
+
+      if (filteredOptions.length > 0) {
+        suggestionsContainer.style.display = 'block';
+      } else {
+        suggestionsContainer.style.display = 'none';
+      }
+    } else {
+      suggestionsContainer.style.display = 'none';
+    }
+  });
+
   document.addEventListener('click', function (event) {
     if (!valveNameInput.contains(event.target) && !suggestionsContainer.contains(event.target)) {
       suggestionsContainer.style.display = 'none';
     }
   });
+
+  function updateValveChangesIndicator() {
+    const valveChangesCount = document.getElementById('valveChangesCount');
+    const valveChangesIndicator = document.getElementById('valveChangesIndicator');
+
+    if (valveChangesCount && valveChangesIndicator) {
+      // Count only non-reset valves
+      const activeValvesCount = valves.filter(valve => !valve.reset).length;
+      valveChangesCount.textContent = activeValvesCount;
+
+      if (activeValvesCount > 0) {
+        valveChangesIndicator.classList.remove('green');
+        valveChangesIndicator.classList.add('red');
+      } else {
+        valveChangesIndicator.classList.remove('red');
+        valveChangesIndicator.classList.add('green');
+      }
+    }
+  }
+
+  function saveToFirebase() {
+    db.collection('valveData')
+      .doc('currentStatus')
+      .set({
+        valves: valves,
+      })
+      .catch(error => {
+        console.error('Error saving to Firebase: ', error);
+      });
+
+    // Update valve changes count
+    db.collection('valveData')
+      .doc('valveChanges')
+      .onSnapshot(doc => {
+        if (doc.exists) {
+          const count = doc.data().count;
+          updateValveChangesIndicator(count);
+        }
+      });
+  }
+
+  function loadFromFirebase() {
+    db.collection('valveData')
+      .doc('currentStatus')
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          valves = doc.data().valves || [];
+          renderValves();
+        }
+      })
+      .catch(error => {
+        console.error('Error loading from Firebase: ', error);
+      });
+  }
 
   loadFromFirebase();
 });

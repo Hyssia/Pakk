@@ -74,14 +74,13 @@ body {
 }
 
 .card {
-  margin: 0 1px;
   text-decoration: none;
   color: black;
-  border: none !important;
+  border: 1px solid lightgray;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-decoration: none !important;
   transition: box-shadow 0.3s ease;
-  width: 14rem;
+  width: calc(100% - 30px);
 }
 
 a.card:hover {
@@ -99,9 +98,11 @@ a.card:hover {
   justify-content: center;
   align-items: center;
   height: 4rem;
+  padding: 20px;
 }
 .card-title {
   margin: 0;
+  margin-top: 1rem;
 }
 header {
   display: flex;
@@ -147,6 +148,38 @@ header .indexLogo {
 #shortStopValveList,
 #longStopValveList {
   font-size: 1.1rem;
+}
+
+.valve-changes {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-right: 1rem;
+}
+
+#valveChangesText {
+  margin-right: 0.5rem;
+  color: white;
+}
+
+#valveChangesCount {
+  margin-right: 0.5rem;
+  color: white;
+}
+
+.indicator {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.indicator.green {
+  background-color: green;
+}
+
+.indicator.red {
+  background-color: red;
 }
 
 /* Media queries for responsive design */
@@ -218,7 +251,7 @@ header .indexLogo {
     width: 10rem;
   }
   .custom-margin {
-    margin-top: -7rem !important;
+    margin-top: -3rem !important;
   }
   .indexTitle {
     margin-top: 1.2rem;

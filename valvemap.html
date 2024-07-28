@@ -38,14 +38,15 @@
         </div>
       </div>
     </div>
+
     <div class="container">
-      <h1 class="mt-3 text-center">Valve Management</h1>
+      <h1 class="mt-3 text-center">Ventilkart</h1>
       <div class="d-flex justify-content-between mb-3">
         <button class="btn btn-primary" id="addValveButton">Add Valve</button>
         <button class="btn btn-danger" id="clearListButton">Clear List</button>
       </div>
       <hr class="my-4" />
-      <div id="valveList" class="valve-list"></div>
+      <div id="valveList" class="row mx-0 g-3"></div>
     </div>
 
     <!-- Add Valve Modal -->
@@ -105,8 +106,8 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="signatureField">Signatur (2 Siffer)</label>
-                <input type="text" class="form-control" id="signatureField" placeholder="Enter Signature" min="1" max="2" />
+                <label for="signatureField">Signatur</label>
+                <input type="text" class="form-control" id="signatureField" placeholder="Enter Signature" min="1" max="10" />
               </div>
               <button type="submit" class="btn btn-primary">Confirm</button>
             </form>
@@ -153,14 +154,7 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="resetSignatureField">Signature</label>
-              <input
-                type="text"
-                class="form-control"
-                id="resetSignatureField"
-                placeholder="Signatur (2 Siffer)"
-                min="1"
-                max="2"
-              />
+              <input type="text" class="form-control" id="resetSignatureField" placeholder="Signatur" min="1" max="10" />
             </div>
             <button type="button" class="btn btn-primary" id="confirmResetButton">Confirm</button>
           </div>
