@@ -13,6 +13,7 @@ body {
   align-items: center;
   padding-left: 1rem;
   z-index: 5;
+  flex-wrap: nowrap;
 }
 
 .nav-bar a {
@@ -204,9 +205,10 @@ header .indexLogo {
   }
 
   .nav-bar {
-    flex-direction: column;
+    flex-direction: row;
     height: auto;
     padding: 0.5rem;
+    flex-wrap: nowrap;
   }
 
   .nav-bar a {
@@ -255,6 +257,9 @@ header .indexLogo {
   }
   .indexTitle {
     margin-top: 1.2rem;
+  }
+  .valve-changes {
+    display: none;
   }
 }
 
