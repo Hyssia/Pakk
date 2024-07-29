@@ -182,6 +182,9 @@ header .indexLogo {
 .indicator.red {
   background-color: red;
 }
+.valve-changes-mobile {
+  display: none;
+}
 
 /* Media queries for responsive design */
 @media (max-width: 990px) {
@@ -260,6 +263,12 @@ header .indexLogo {
   }
   .valve-changes {
     display: none;
+  }
+  .valve-changes-mobile {
+    display: block;
+    color: black;
+  }
+  .valve-changes-mobile span {
   }
 }
 
