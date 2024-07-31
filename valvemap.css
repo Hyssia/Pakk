@@ -47,8 +47,9 @@ body {
   right: 10px;
 }
 .valve-item .card-title {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  color: red;
 }
 .valve-item .card-text {
   margin: 5px 0;
