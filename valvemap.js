@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="card-body">
           <h5 class="card-title">${valve.valveName}</h5>
           <p class="card-text"><strong>Date:</strong> ${valve.dateField}</p>
-          <p class="card-text"><strong>Lock ID:</strong> ${valve.lockIdField} / <strong>Note ID:</strong> ${valve.noteIdField}</p>
+          <p class="card-text"><strong>Hengelås:</strong> ${valve.lockIdField} / <strong>Gul Lapp:</strong> ${valve.noteIdField}</p>
           <p class="card-text"><strong>Comment:</strong> ${valve.commentField}</p>
           <p class="card-text"><strong>State:</strong> ${valve.state}</p>
           <p class="card-text"><strong>Signature:</strong> ${valve.signatureField}</p>
