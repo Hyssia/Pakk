@@ -43,6 +43,7 @@
       <h1 class="mt-3 text-center">Ventilkart</h1>
       <div class="d-flex justify-content-between mb-3">
         <button class="btn btn-secondary" id="addValveButton">Legg til endring</button>
+        <button class="btn btn-warning" id="undoButton" style="display: none">Angre sletting</button>
         <button class="btn btn-danger" id="clearListButton">Slett liste</button>
       </div>
       <hr class="my-4" />
@@ -70,39 +71,47 @@
             <form id="valveForm">
               <div class="form-group position-relative">
                 <label for="valveName">Utstyr</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="valveName"
-                  placeholder="Søk eller skriv inn"
-                  autocomplete="off"
-                />
+                <input type="text" class="form-control" id="valveName" placeholder="Søk eller skriv inn" autocomplete="off" />
                 <div id="suggestions" class="dropdown-menu w-100"></div>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="dateField">Dato</label>
                 <input type="date" class="form-control" id="dateField" />
-              </div>
+              </div> -->
               <div class="form-group">
                 <label for="lockIdField">Hengelås Nummer</label>
-                <input type="number" class="form-control" id="lockIdField" placeholder="Legg til Hengelås Nummer" />
+                <input type="number" class="form-control" id="lockIdField" placeholder="Legg til hengelås" />
               </div>
               <div class="form-group">
                 <label for="noteIdField">Gul Lapp Nummer</label>
-                <input type="number" class="form-control" id="noteIdField" placeholder="Legg til Gul Lapp Nummer" />
+                <input type="number" class="form-control" id="noteIdField" placeholder="Legg til gul lapp" />
               </div>
               <div class="form-group">
                 <label for="commentField">Kommentar</label>
                 <textarea class="form-control" id="commentField" placeholder="Skriv kommentar"></textarea>
               </div>
               <div class="form-group">
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="openCheckbox" />
-                  <label class="form-check-label" for="openCheckbox">Åpen</label>
-                </div>
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="closeCheckbox" />
-                  <label class="form-check-label" for="closeCheckbox">Stengt</label>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="openCheckbox" />
+                      <label class="form-check-label" for="openCheckbox">Åpen</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="startedCheckbox" />
+                      <label class="form-check-label" for="startedCheckbox">Startet</label>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="closeCheckbox" />
+                      <label class="form-check-label" for="closeCheckbox">Stengt</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="stoppedCheckbox" />
+                      <label class="form-check-label" for="stoppedCheckbox">Stoppet</label>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group">

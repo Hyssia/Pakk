@@ -1,5 +1,32 @@
 body {
   padding-top: 50px;
+  background: white;
+  color: black;
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  background: #202020 !important;
+  color: white !important;
+}
+
+.dark-mode .card img {
+  filter: invert(1) sepia(1) saturate(5) hue-rotate(300deg);
+}
+
+.dark-mode .dropdown-menu {
+  background-color: #333;
+}
+
+.dark-mode .dropdown-item {
+  color: white;
+}
+
+.dark-mode .card {
+  border: 1px solid black;
+  background: #202020;
+  color: darkred;
 }
 
 .nav-bar {
@@ -64,6 +91,9 @@ body {
   align-items: center;
   margin-bottom: 1rem;
 }
+.headerContainer {
+  padding-top: 1rem !important;
+}
 
 #logForm {
   padding-bottom: 5rem;
@@ -74,18 +104,30 @@ body {
   margin-bottom: 2rem;
 }
 
+.btn {
+  border-radius: 1.2rem !important;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+.btn:hover {
+  background-color: #005bb5; /* Darker blue for hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
+}
+.btn:activate {
+  transform: translateY(1px);
+}
+
 .card {
   text-decoration: none;
   color: black;
   border: 1px solid lightgray;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   text-decoration: none !important;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.1s ease;
   width: calc(100% - 30px);
 }
 
 a.card:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.3);
   color: inherit;
 }
 
@@ -93,6 +135,8 @@ a.card:hover {
   height: 180px;
   object-fit: fill;
   width: 100%;
+
+  transition: filter 0.3s ease;
 }
 .card-body {
   display: flex;
@@ -256,7 +300,7 @@ header .indexLogo {
     width: 10rem;
   }
   .custom-margin {
-    margin-top: -3rem !important;
+    margin-top: -8rem !important;
   }
   .indexTitle {
     margin-top: 1.2rem;

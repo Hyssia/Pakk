@@ -20,9 +20,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const addValveModal = new bootstrap.Modal(document.getElementById('addValveModal'));
   const clearListModal = new bootstrap.Modal(document.getElementById('clearListModal'));
   const resetModal = new bootstrap.Modal(document.getElementById('resetModal'));
+  const undoButton = document.getElementById('undoButton');
 
   let valves = [];
   let resetIndex = null;
+  let valvesBackup = [];
 
   addValveButton.addEventListener('click', function () {
     addValveModal.show();
@@ -32,21 +34,46 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault();
 
     const valveName = document.getElementById('valveName').value;
-    const dateField = document.getElementById('dateField').value;
+    // const dateField = document.getElementById('dateField').value;
     const lockIdField = document.getElementById('lockIdField').value;
     const noteIdField = document.getElementById('noteIdField').value;
     const commentField = document.getElementById('commentField').value;
+    const signatureField = document.getElementById('signatureField').value;
+
+    const today = new Date();
+    const currentDate = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${today.getFullYear()}`;
+
     const openCheckbox = document.getElementById('openCheckbox').checked;
     const closeCheckbox = document.getElementById('closeCheckbox').checked;
-    const signatureField = document.getElementById('signatureField').value;
+    const startedCheckbox = document.getElementById('startedCheckbox').checked;
+    const stoppedCheckbox = document.getElementById('stoppedCheckbox').checked;
+
+    let state = [];
+    if (openCheckbox) {
+      state.push('Åpen');
+    } else if (closeCheckbox) {
+      state.push('Stengt');
+    }
+
+    if (startedCheckbox) {
+      state.push('Startet');
+    } else if (stoppedCheckbox) {
+      state.push('Stoppet');
+    }
+
+    if (state.length === 0) {
+      valve.state = '';
+    }
 
     const valve = {
       valveName,
-      dateField,
+      dateField: currentDate,
       lockIdField,
       noteIdField,
       commentField,
-      state: openCheckbox ? 'Open' : 'Closed',
+      state: state.length > 0 ? state.join(' ') : '',
       signatureField,
       reset: false,
     };
@@ -63,10 +90,21 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   confirmClearButton.addEventListener('click', function () {
+    valvesBackup = [...valves];
     valves = [];
     saveToFirebase();
     renderValves();
+
+    undoButton.style.display = 'block';
     clearListModal.hide();
+  });
+
+  undoButton.addEventListener('click', function () {
+    valves = [...valvesBackup];
+    saveToFirebase();
+    renderValves();
+
+    undoButton.style.display = 'none';
   });
 
   function renderValves() {
@@ -78,7 +116,9 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="card-body">
           <h5 class="card-title">${valve.valveName}</h5>
           <p class="card-text"><strong>Date:</strong> ${valve.dateField}</p>
-          <p class="card-text"><strong>Hengelås:</strong> ${valve.lockIdField} / <strong>Gul Lapp:</strong> ${valve.noteIdField}</p>
+          <p class="card-text"><strong>Hengelås:</strong> ${valve.lockIdField} / <strong>Gul Lapp:</strong> ${
+        valve.noteIdField
+      }</p>
           <p class="card-text"><strong>Comment:</strong> ${valve.commentField}</p>
           <p class="card-text"><strong>State:</strong> ${valve.state}</p>
           <p class="card-text"><strong>Signature:</strong> ${valve.signatureField}</p>

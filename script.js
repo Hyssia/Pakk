@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM loaded');
 
+  const toggleDarkModeButton = document.getElementById('toggleDarkMode');
+
+  toggleDarkModeButton.addEventListener('click', function () {
+    // Toggle the dark-mode class on the body element
+    document.body.classList.toggle('dark-mode');
+  });
+
   const codeInput = document.getElementById('codeInput');
   if (codeInput) {
     codeInput.addEventListener('input', function () {
