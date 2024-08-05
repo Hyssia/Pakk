@@ -1,7 +1,15 @@
+:root {
+  --main-text: #051821;
+  --main-text-light: #eeeeee;
+  --main-btn: #686d76;
+  --main-btn2: #373a40;
+  --main-accent: #dc5f00;
+}
+
 body {
   padding-top: 50px;
   background: white;
-  color: black;
+  color: var(--main-text);
 
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -104,9 +112,44 @@ body.dark-mode {
   margin-bottom: 2rem;
 }
 
+.btnNext,
+.btnSend {
+  background-color: var(--main-btn) !important;
+}
+
+.btnClear {
+  background-color: var(--main-accent) !important;
+  color: white !important;
+}
+
+#confirmButton {
+  background-color: var(--main-btn);
+}
+
+#annetButton {
+  background-color: var(--main-btn2);
+}
+
+#addValveButton {
+  background-color: var(--main-btn);
+}
+
+#undoButton {
+  background-color: var(--main-text-light);
+}
+
+#clearListButton {
+  background-color: var(--main-accent);
+}
+
+#bekreftBtn {
+  background-color: var(--main-btn);
+}
+
 .btn {
   border-radius: 1.2rem !important;
   transition: background-color 0.3s, box-shadow 0.3s;
+  border: none !important;
 }
 .btn:hover {
   background-color: #005bb5; /* Darker blue for hover */
@@ -124,30 +167,46 @@ body.dark-mode {
   text-decoration: none !important;
   transition: box-shadow 0.1s ease;
   width: calc(100% - 30px);
+
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
 }
 
 a.card:hover {
   box-shadow: 0 8px 35px rgba(0, 0, 0, 0.3);
   color: inherit;
+
+  transform: translateY(-5px);
 }
 
 .card img {
   height: 180px;
-  object-fit: fill;
+  object-fit: cover;
   width: 100%;
 
   transition: filter 0.3s ease;
+  transition: transform 0.3s ease;
 }
+.card img:hover {
+  transform: scale(1.05);
+}
+
 .card-body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 4rem;
   padding: 20px;
+
+  flex-direction: column;
 }
 .card-title {
   margin: 0;
   margin-top: 1rem;
+
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
 header {
   display: flex;
@@ -280,6 +339,9 @@ header .indexLogo {
   }
   #loginLogo {
     display: none;
+  }
+  #loginButton {
+    background-color: var(--main-btn);
   }
   .bigDisplay {
     font-size: 1.1rem;
