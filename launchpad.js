@@ -42,4 +42,30 @@ document.addEventListener('DOMContentLoaded', function () {
         updateValveChangesIndicator(activeValvesCount);
       }
     });
+
+  function updateLogChangesIndicator(count) {
+    const logChangesCount = document.getElementById('logChangesCount');
+    const logChangesIndicator = document.getElementById('logChangesIndicator');
+    if (logChangesCount && logChangesIndicator) {
+      logChangesCount.textContent = count;
+      if (count > 0) {
+        logChangesIndicator.classList.remove('green');
+        logChangesIndicator.classList.add('red');
+      } else {
+        logChangesIndicator.classList.remove('red');
+        logChangesIndicator.classList.add('green');
+      }
+    }
+  }
+
+  // Assuming 'logs' is the collection where logs are stored
+  db.collection('logs')
+    .get()
+    .then(snapshot => {
+      const newLogsCount = snapshot.size; // Total number of logs
+      updateLogChangesIndicator(newLogsCount);
+    })
+    .catch(error => {
+      console.error('Error fetching logs:', error);
+    });
 });

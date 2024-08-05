@@ -254,7 +254,60 @@ header .indexLogo {
   font-size: 1.1rem;
 }
 
-.valve-changes {
+.status-indicators {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.status-indicators > div {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem; /* Space between each indicator group */
+}
+
+.d_style {
+  color: white;
+  margin: 0 0.5rem;
+}
+
+.title_style {
+  color: red !important;
+}
+
+#logChangesText,
+#valveChangesText {
+  margin-right: 0.5rem;
+  color: white;
+}
+
+#logChangesCount,
+#valveChangesCount {
+  margin-right: 0.5rem;
+  color: white;
+}
+
+.indicator {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.indicator.green {
+  background-color: green;
+}
+
+.indicator.red {
+  background-color: red;
+}
+
+.valve-changes-mobile {
+  display: none;
+}
+
+/* .valve-changes {
   display: flex;
   align-items: center;
   margin-left: auto;
@@ -287,7 +340,7 @@ header .indexLogo {
 }
 .valve-changes-mobile {
   display: none;
-}
+} */
 
 /* Media queries for responsive design */
 @media (max-width: 990px) {
