@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PM5 Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="log-style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+FR+Moderne:wght@100..400&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LT9ZRFRQC"></script>
+
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-2LT9ZRFRQC');
+    </script>
+  </head>
+  <body>
+    <div class="nav-bar" id="navContainer">
+      <div class="dropdown">
+        <a href="#" id="homeIcon" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-home"></i>
+        </a>
+        <span class="d_style">|</span> <span class="title_style">PM5 Dashboard</span> <span class="d_style">|</span>
+        <div class="dropdown-menu">
+          <a class="dropdown-item nav-link text-dark" href="launchpad.html" data-target="mainContainer">Tilbake</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <h1 class="text-center">Operatør Logg</h1>
+      <div class="logButtons d-flex justify-content-center my-3">
+        <button id="addLogButton" class="btn btn-primary mr-2" data-toggle="modal" data-target="#addLogModal">Add Log</button>
+        <button id="clearListButton" class="btn btn-danger">Clear List</button>
+      </div>
+      <hr class="my-4" />
+      <div class="d-flex justify-content-center">
+        <ul id="logList" class="list-group"></ul>
+      </div>
+    </div>
+
+    <!-- Add Log Modal -->
+    <div id="addLogModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addLogModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addLogModalLabel">Add Log</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="logForm">
+              <div class="form-group">
+                <label for="logTitle" class="label-style">Title:</label>
+                <input type="text" id="logTitle" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="logDescription" class="label-style">Description:</label>
+                <textarea id="logDescription" class="form-control" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="logImportance" class="label-style">Importance Level:</label>
+                <select id="logImportance" class="form-control">
+                  <option value="green">Green</option>
+                  <option value="yellow">Yellow</option>
+                  <option value="red">Red</option>
+                </select>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <button type="button" id="addPhotoButton" class="btn btn-secondary">Add Photo</button>
+                <input type="file" id="photoInput" accept="image/*" capture="environment" style="display: none" />
+                <button type="submit" class="btn btn-primary">Add Log</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Log Modal -->
+    <div id="viewLogModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="viewLogModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="viewLogTitle"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="viewLogDescription" class="modal-text"></p>
+            <button id="showImageButton" class="btn btn-secondary">Show Image</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Image Modal -->
+    <div
+      id="viewImageModal"
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="viewImageModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="viewImageModalLabel">Image</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <img id="logImage" src="" alt="Log Image" class="img-fluid" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js" type="module"></script>
+
+    <script src="script.js"></script>
+    <script src="logscript.js" type="module"></script>
+  </body>
+</html>

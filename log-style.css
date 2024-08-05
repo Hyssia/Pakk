@@ -1,0 +1,95 @@
+body {
+  padding-top: 50px;
+  font-family: 'Playwrite FR Moderne', sans-serif;
+  background-color: #f4f4f4;
+}
+
+.modal-content {
+  background-color: #404040;
+  border-radius: 8px;
+  color: black;
+}
+
+.modal-title {
+  color: black;
+  font-weight: bold;
+}
+
+.label-style {
+  color: black;
+  font-weight: bold;
+}
+
+.logButtons {
+  display: flex;
+  justify-content: center;
+}
+
+.form-control {
+  background-color: #555;
+  color: black;
+  border: none;
+}
+
+.form-control:focus {
+  background-color: #666;
+  color: black;
+  box-shadow: none;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+#logList {
+  max-width: 600px; /* Limit the width of the list */
+  width: 100%; /* Make it responsive */
+  padding: 0;
+}
+
+.list-group-item {
+  background-color: #ffffff;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.importance-indicator {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.list-group-item {
+  background-color: #ffffff;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer; /* Change the cursor to pointer */
+  transition: background-color 0.1s, box-shadow 0.1s; /* Smooth transition for hover effects */
+}
+
+.list-group-item:hover {
+  background-color: #f0f0f0; /* Light grey background on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+}
+
+@media (max-width: 768px) {
+  .modal-dialog {
+    width: 90%;
+  }
+}
