@@ -432,6 +432,9 @@ header .indexLogo {
   .status-indicators {
     display: none;
   }
+  .log-changes {
+    display: none;
+  }
 }
 
 @media (max-width: 576px) {
