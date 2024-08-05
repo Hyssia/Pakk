@@ -427,12 +427,10 @@ header .indexLogo {
     display: block;
     color: black;
   }
-  .valve-changes-mobile span {
-  }
-  .status-indicators {
+  .log-changes {
     display: none;
   }
-  .log-changes {
+  .status-indicators {
     display: none;
   }
 }
@@ -451,5 +449,8 @@ header .indexLogo {
   }
   .custom-margin {
     margin-top: 2rem;
+  }
+  .status-indicators {
+    display: none;
   }
 }
