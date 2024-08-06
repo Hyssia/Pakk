@@ -163,13 +163,25 @@ document.addEventListener('DOMContentLoaded', function () {
     addDoc(collection(db, 'logs'), {
       title,
       description,
-      importance, // Ensure this is stored correctly
+      importance,
       signature,
       imageUrl,
       timestamp: serverTimestamp(),
     })
       .then(docRef => {
         displayLog(title, description, importance, signature, docRef.id, imageUrl, new Date());
+
+        // Trigger SweetAlert notification
+        Swal.fire({
+          title: 'Log Added',
+          text: 'Your log has been successfully added.',
+          icon: 'success',
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        });
       })
       .catch(error => {
         console.error('Error adding log:', error);

@@ -31,15 +31,13 @@
   </head>
   <body>
     <div class="nav-bar" id="navContainer">
-      <div class="dropdown">
-        <a href="#" id="homeIcon" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="fas fa-home"></i>
-        </a>
-        <span class="d_style">|</span> <span class="title_style">PM5 Dashboard</span> <span class="d_style">|</span>
-        <div class="dropdown-menu">
-          <button id="toggleDarkMode" class="dropdown-item">Toggle Dark Mode</button>
-        </div>
-      </div>
+      <a href="#" id="homeIcon" class="toggle-nav">
+        <i class="fas fa-home"></i>
+      </a>
+      <span class="d_style">|</span>
+      <a href="launchpad.html"><span class="title_style">PM5 Dashboard</span></a>
+      <span class="d_style">|</span>
+
       <div class="status-indicators">
         <div class="log-changes">
           <a href="log.html"><span>&nbsp;|&nbsp;</span><span id="logChangesText">Log endringer:</span></a>
@@ -55,6 +53,18 @@
       </div>
     </div>
 
+    <div id="sideNav" class="side-nav">
+      <a href="pakk_app.html">PakkID Søk</a>
+      <a href="rems_app.html">Rems utskudd</a>
+      <a href="forbedring.html">Forbedring</a>
+      <a href="order-form.html">Rekvisitt bestilling</a>
+      <a href="valvemap.html">Ventilkart</a>
+      <a href="log.html">Operatør Logg (TEST)</a>
+      <a href="https://drive.google.com/drive/folders/1OWO_s4FUsVoe4MyfNoFnDEIeimtVvxYR" target="_blank" rel="noopener noreferrer"
+        >Kjøre spesifikasjoner</a
+      >
+    </div>
+
     <header class="headerContainer" id="headerContainer">
       <img src="img/Blod.png" alt="" class="indexLogo" id="iLogo" />
       <h3 class="indexTitle" id="iTitle">Launchpad</h3>
@@ -68,7 +78,7 @@
       style="min-height: 100vh"
     >
       <div class="row card-container">
-        <div class="col-6 col-md-3 mb-1">
+        <div class="col-6 col-md-3 mb-3 cardBox">
           <a href="pakk_app.html" class="card text-center">
             <img src="img/cardicon (1).png" class="card-img-top" alt="Image 1" />
             <div class="card-body">
@@ -77,7 +87,7 @@
           </a>
         </div>
 
-        <div class="col-6 col-md-3 mb-1">
+        <div class="col-6 col-md-3 mb-3">
           <a href="rems_app.html" class="card text-center">
             <img src="img/cardicon (2).png" class="card-img-top" alt="Image 2" />
             <div class="card-body">
@@ -86,7 +96,7 @@
           </a>
         </div>
 
-        <div class="col-6 col-md-3 mb-1">
+        <div class="col-6 col-md-3 mb-3">
           <a href="forbedring.html" class="card text-center">
             <img src="img/cardicon (3).png" class="card-img-top" alt="Image 3" />
             <div class="card-body">
@@ -94,7 +104,7 @@
             </div>
           </a>
         </div>
-        <div class="col-6 col-md-3 mb-1">
+        <div class="col-6 col-md-3 mb-3">
           <a href="order-form.html" class="card text-center">
             <img src="img/cardicon (4).png" class="card-img-top" alt="Image 4" />
             <div class="card-body">
@@ -102,7 +112,7 @@
             </div>
           </a>
         </div>
-        <div class="col-6 col-md-3 mb-1">
+        <div class="col-6 col-md-3 mb-3">
           <a href="valvemap.html" class="card text-center">
             <img src="img/ventil.jpg" class="card-img-top" alt="Image 4" />
             <div class="card-body">
@@ -110,7 +120,7 @@
             </div>
           </a>
         </div>
-        <div class="col-6 col-md-3 mb-1">
+        <div class="col-6 col-md-3 mb-3">
           <a href="log.html" class="card text-center">
             <img src="img/log.png" class="card-img-top" alt="Image 4" />
             <div class="card-body">
@@ -118,7 +128,7 @@
             </div>
           </a>
         </div>
-        <div class="col-6 col-md-3 mb-1">
+        <div class="col-6 col-md-3 mb-3">
           <a
             href="https://drive.google.com/drive/folders/1OWO_s4FUsVoe4MyfNoFnDEIeimtVvxYR"
             class="card text-center"

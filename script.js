@@ -65,4 +65,22 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+  document.getElementById('homeIcon').addEventListener('click', function () {
+    const sideNav = document.getElementById('sideNav');
+    sideNav.style.width = '250px';
+    sideNav.classList.add('open');
+  });
+
+  document.addEventListener('click', function (event) {
+    const sideNav = document.getElementById('sideNav');
+    if (
+      sideNav.style.width === '250px' &&
+      !sideNav.contains(event.target) &&
+      !document.getElementById('homeIcon').contains(event.target)
+    ) {
+      sideNav.style.width = '0';
+      sideNav.classList.remove('open');
+    }
+  });
 });

@@ -73,20 +73,57 @@ body.dark-mode {
 
 .title_style {
   color: red !important;
+  text-decoration: none !important;
 }
 
-.dropdown-menu {
-  background-color: #404040;
-  border: none;
-}
-
-.dropdown-item {
-  color: black;
-}
-
-.dropdown-item:hover {
-  background-color: #555;
+.toggle-nav {
   color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.side-nav {
+  height: 100%;
+  position: fixed;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #404040;
+  overflow-x: hidden;
+  transition: width 0.2s;
+  padding-top: 60px;
+  z-index: 4;
+  box-shadow: 10px 0 35px rgba(0, 0, 0, 0.3);
+}
+
+.side-nav a {
+  padding: 10px 15px;
+  text-decoration: none !important;
+  font-size: 25px;
+  color: white;
+  display: block;
+  opacity: 0;
+
+  transition: color 0.3s, background-color 0.3s; /* Smooth transition for hover effects */
+  border-bottom: 1px solid #353535; /* Add a line between items */
+}
+
+.side-nav.open a {
+  opacity: 1;
+}
+
+.side-nav a:hover {
+  color: red;
+  background-color: #555;
+}
+
+.toggle-nav {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 .container {
@@ -143,6 +180,10 @@ body.dark-mode {
 }
 
 #bekreftBtn {
+  background-color: var(--main-btn);
+}
+
+#addLogButton {
   background-color: var(--main-btn);
 }
 
@@ -305,6 +346,9 @@ header .indexLogo {
   display: none;
 }
 
+.cardBox {
+  margin-bottom: 5rem !important;
+}
 /* .valve-changes {
   display: flex;
   align-items: center;
@@ -401,16 +445,16 @@ header .indexLogo {
     display: none;
   }
   .card-body {
-    height: 60px;
+    height: 40px;
   }
   .card img {
     height: 120px;
   }
   .card-title {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   .card {
-    width: 10rem;
+    width: 8rem;
   }
   .custom-margin {
     margin-top: -2rem !important;
@@ -430,6 +474,9 @@ header .indexLogo {
   }
   .status-indicators {
     display: none;
+  }
+  .side-nav a {
+    font-size: 1rem !important;
   }
 }
 

@@ -11,13 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  const toggleDarkModeButton = document.getElementById('toggleDarkMode');
-
-  toggleDarkModeButton.addEventListener('click', function () {
-    // Toggle the dark-mode class on the body element
-    document.body.classList.toggle('dark-mode');
-  });
-
   function updateValveChangesIndicator(count) {
     const valveChangesCount = document.getElementById('valveChangesCount');
     const valveChangesIndicator = document.getElementById('valveChangesIndicator');
