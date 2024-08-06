@@ -38,7 +38,10 @@ body {
 }
 
 .modal-body {
+  display: flex;
   padding: 20px;
+  flex-direction: column !important; /* Align elements vertically */
+  gap: 15px; /* Add space between elements */
 }
 
 .img-fluid {
@@ -50,6 +53,28 @@ body {
   max-width: 600px; /* Limit the width of the list */
   width: 100%; /* Make it responsive */
   padding: 0;
+}
+
+#viewLogDescription {
+  /* height: 6rem; */
+  border: 1px solid #a2a2a2; /* Outline for the description box */
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #f0efef; /* Distinct background for the description */
+}
+
+#showImageButton {
+  margin-top: 2rem;
+}
+
+#viewLogSignature,
+#viewLogDate {
+  margin-top: 10px;
+  font-weight: bold; /* Make the text bold */
+}
+
+#viewLogDate {
+  text-align: right; /* Align date to the right */
 }
 
 .list-group-item {

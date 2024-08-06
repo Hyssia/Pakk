@@ -1,4 +1,3 @@
-// Import and configure Firebase
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js';
 import {
   getFirestore,
@@ -7,6 +6,9 @@ import {
   getDocs,
   serverTimestamp,
   writeBatch,
+  query, // Import query
+  orderBy, // Import orderBy
+  doc,
 } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js';
 import {
   getStorage,
@@ -63,47 +65,44 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  clearListButton.addEventListener('click', async function () {
-    try {
-      // Clear the displayed list of logs
-      logList.innerHTML = '';
-      console.log('Log list cleared from the page.');
+  // clearListButton.addEventListener('click', async function () {
+  //   try {
+  //     // Clear the displayed list of logs
+  //     logList.innerHTML = '';
+  //     console.log('Log list cleared from the page.');
 
-      // Fetch all logs from Firestore and delete them
-      const querySnapshot = await getDocs(collection(db, 'logs'));
-      const batch = writeBatch(db); // Use writeBatch to create a new batch
+  //     // Fetch all logs from Firestore and delete them
+  //     const querySnapshot = await getDocs(collection(db, 'logs'));
+  //     const batch = writeBatch(db); // Use writeBatch to create a new batch
 
-      querySnapshot.forEach(doc => {
-        batch.delete(doc.ref);
-      });
+  //     querySnapshot.forEach(doc => {
+  //       batch.delete(doc.ref);
+  //     });
 
-      await batch.commit();
-      console.log('All logs deleted from Firestore.');
-    } catch (error) {
-      console.error('Error deleting logs:', error);
-    }
-  });
+  //     await batch.commit();
+  //     console.log('All logs deleted from Firestore.');
+  //   } catch (error) {
+  //     console.error('Error deleting logs:', error);
+  //   }
+  // });
 
   // Handle form submission
   logForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    console.log('Form submitted');
 
     const title = document.getElementById('logTitle').value;
     const description = document.getElementById('logDescription').value;
-    const importance = document.getElementById('logImportance').value;
-
-    console.log(`Title: ${title}, Description: ${description}, Importance: ${importance}`);
+    const importance = document.getElementById('logImportance').value; // Make sure this is reading correctly
+    const signature = document.getElementById('logSignature').value;
 
     if (currentImageFile) {
       compressImage(currentImageFile, 0.7, 800, compressedFile => {
-        uploadImageAndSaveLog(compressedFile, title, description, importance);
+        uploadImageAndSaveLog(compressedFile, title, description, importance, signature);
       });
     } else {
-      saveLogToFirestore(title, description, importance, null);
+      saveLogToFirestore(title, description, importance, signature, null);
     }
 
-    // Close the modal after submission
     $('#addLogModal').modal('hide');
     logForm.reset();
     currentImageFile = null;
@@ -140,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
     reader.readAsDataURL(file);
   }
 
-  function uploadImageAndSaveLog(file, title, description, importance) {
+  function uploadImageAndSaveLog(file, title, description, importance, signature) {
     const storageRef = ref(storage, `logs/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -153,52 +152,58 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Upload failed:', error);
       },
       () => {
-        // Get the download URL and save the log in Firestore
         getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
-          console.log('Image uploaded:', downloadURL);
-          saveLogToFirestore(title, description, importance, downloadURL);
+          saveLogToFirestore(title, description, importance, signature, downloadURL);
         });
       }
     );
   }
 
-  function saveLogToFirestore(title, description, importance, imageUrl) {
+  function saveLogToFirestore(title, description, importance, signature, imageUrl) {
     addDoc(collection(db, 'logs'), {
       title,
       description,
-      importance,
+      importance, // Ensure this is stored correctly
+      signature,
       imageUrl,
       timestamp: serverTimestamp(),
     })
       .then(docRef => {
-        console.log('Log added with ID:', docRef.id);
-        // Pass description to the displayLog function
-        displayLog(title, description, importance, docRef.id, imageUrl);
+        displayLog(title, description, importance, signature, docRef.id, imageUrl, new Date());
       })
       .catch(error => {
         console.error('Error adding log:', error);
       });
   }
 
-  function displayLog(title, description, importance, id, imageUrl) {
+  function displayLog(title, description, importance, signature, id, imageUrl, timestamp) {
     const listItem = document.createElement('li');
+
+    const formattedDate = timestamp.toLocaleDateString();
+
     listItem.setAttribute('data-id', id);
     listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
     listItem.innerHTML = `
-        <div class="importance-indicator" style="background-color: ${importance}; width: 10px; height: 10px; border-radius: 50%;"></div>
-        <span class="ml-2">${title}</span>
+        <div class="d-flex align-items-center">
+          <div class="importance-indicator" style="background-color: ${importance}; width: 10px; height: 10px; border-radius: 50%;"></div>
+          <span class="ml-2" style="font-size: 0.85rem; margin-left: 2rem;">${formattedDate}</span>
+        </div>
+        <span class="ml-auto">${title}</span>
     `;
-    // Use an arrow function to pass description correctly
-    listItem.addEventListener('click', () => openViewLogModal(title, description, imageUrl));
-    logList.appendChild(listItem);
+    listItem.addEventListener('click', () => openViewLogModal(title, description, importance, signature, imageUrl, timestamp));
+    logList.prepend(listItem); // Add new logs to the top of the list
   }
 
-  function openViewLogModal(title, description, imageUrl) {
+  function openViewLogModal(title, description, importance, signature, imageUrl, timestamp) {
     const viewLogTitle = document.getElementById('viewLogTitle');
     const viewLogDescription = document.getElementById('viewLogDescription');
+    const viewLogSignature = document.getElementById('viewLogSignature');
+    const viewLogDate = document.getElementById('viewLogDate');
 
     viewLogTitle.textContent = title;
     viewLogDescription.textContent = description;
+    viewLogSignature.textContent = `Signature: ${signature}`;
+    viewLogDate.textContent = `Date: ${timestamp.toLocaleDateString()}`;
 
     showImageButton.onclick = function () {
       if (imageUrl) {
@@ -214,13 +219,106 @@ document.addEventListener('DOMContentLoaded', function () {
 
   async function loadLogs() {
     try {
-      const querySnapshot = await getDocs(collection(db, 'logs'));
+      const logsQuery = query(
+        collection(db, 'logs'),
+        orderBy('timestamp', 'desc') // Order logs by timestamp in descending order
+      );
+
+      const querySnapshot = await getDocs(logsQuery);
+
+      logList.innerHTML = ''; // Clear the list before appending logs
+
       querySnapshot.forEach(doc => {
         const data = doc.data();
-        displayLog(data.title, data.description, data.importance, doc.id, data.imageUrl);
+        displayLog(data.title, data.description, data.importance, data.signature, doc.id, data.imageUrl, data.timestamp.toDate());
       });
     } catch (error) {
       console.error('Error loading logs:', error);
     }
   }
+
+  const adminLogList = document.getElementById('adminLogList');
+  const deleteSelectedLogsButton = document.getElementById('deleteSelectedLogs');
+  const clearAllLogsButton = document.getElementById('clearAllLogs');
+  const hiddenKeyword = 'flæsktambur'; // Secret keyword to trigger admin panel
+
+  document.getElementById('logTitle').addEventListener('input', function (event) {
+    if (event.target.value.toLowerCase() === hiddenKeyword) {
+      openAdminModal();
+    }
+  });
+
+  // Load logs for the admin modal
+  function openAdminModal() {
+    $('#adminLogModal').modal('show');
+    $('#addLogModal').modal('hide');
+    loadAdminLogs();
+  }
+
+  // Load logs into the admin panel
+  async function loadAdminLogs() {
+    try {
+      const logsQuery = query(collection(db, 'logs'), orderBy('timestamp', 'desc'));
+
+      const querySnapshot = await getDocs(logsQuery);
+      adminLogList.innerHTML = '';
+
+      querySnapshot.forEach(doc => {
+        const data = doc.data();
+        const listItem = document.createElement('li');
+        listItem.classList.add('list-group-item', 'd-flex', 'align-items-center');
+        listItem.innerHTML = `
+          <input type="checkbox" class="log-checkbox mr-2" data-id="${doc.id}">
+          <span>${data.title}</span>
+        `;
+        adminLogList.appendChild(listItem);
+      });
+    } catch (error) {
+      console.error('Error loading logs:', error);
+    }
+  }
+
+  // Delete selected logs
+  deleteSelectedLogsButton.addEventListener('click', async function () {
+    const checkboxes = document.querySelectorAll('.log-checkbox:checked');
+
+    if (checkboxes.length === 0) {
+      alert('No logs selected for deletion.');
+      return;
+    }
+
+    const batch = writeBatch(db);
+
+    checkboxes.forEach(checkbox => {
+      const logId = checkbox.getAttribute('data-id');
+      const logRef = doc(db, 'logs', logId);
+      batch.delete(logRef);
+    });
+
+    try {
+      await batch.commit();
+      console.log('Selected logs deleted successfully.');
+      loadLogs(); // Refresh the log list after deletion
+      loadAdminLogs(); // Refresh the admin panel list
+      $('#adminLogModal').modal('hide');
+    } catch (error) {
+      console.error('Error deleting selected logs:', error);
+      alert('Failed to delete selected logs. Please try again.');
+    }
+  });
+  // Clear all logs
+  clearAllLogsButton.addEventListener('click', async function () {
+    if (!confirm('Are you sure you want to delete all logs?')) return;
+
+    const logsQuery = await getDocs(collection(db, 'logs'));
+    const batch = writeBatch(db);
+
+    logsQuery.forEach(doc => {
+      batch.delete(doc.ref);
+    });
+
+    await batch.commit();
+    loadLogs(); // Refresh the log list
+    $('#adminLogModal').modal('hide');
+  });
 });

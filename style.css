@@ -160,7 +160,6 @@ body.dark-mode {
 }
 
 .card {
-  text-decoration: none;
   color: black;
   border: 1px solid lightgray;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
@@ -206,7 +205,6 @@ a.card:hover {
   margin-top: 1rem;
 
   margin-bottom: 0.5rem;
-  font-weight: bold;
 }
 header {
   display: flex;
