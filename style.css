@@ -462,18 +462,18 @@ header .indexLogo {
     height: 30px;
   }
   .card img {
-    height: 60px; /* Reduces the image height, 120 original */
+    height: 80px; /* Reduces the image height, 120 original */
     width: 100%;
   }
   .card-title {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
   .card {
-    width: 5rem; /* 10 original */
-    margin: 0.5rem; /* 0 original */
+    width: 6.5rem; /* 10 original */
+    margin: 0rem; /* 0 original */
   }
   .custom-margin {
-    margin-top: -7rem !important;
+    margin-top: -12rem !important;
   }
   .indexTitle {
     margin-top: 1.2rem;
