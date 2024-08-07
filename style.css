@@ -232,6 +232,12 @@ a.card:hover {
   transform: scale(1.05);
 }
 
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .card-body {
   display: flex;
   justify-content: center;
@@ -247,6 +253,14 @@ a.card:hover {
 
   margin-bottom: 0.5rem;
 }
+
+.col-6 {
+  display: flex;
+  justify-content: center; /* Centers items horizontally within each column */
+  align-items: center; /* Centers items vertically within each column */
+  padding: 0; /* Removes default padding */
+}
+
 header {
   display: flex;
   width: 100%;
@@ -445,19 +459,21 @@ header .indexLogo {
     display: none;
   }
   .card-body {
-    height: 40px;
+    height: 30px;
   }
   .card img {
-    height: 120px;
+    height: 60px; /* Reduces the image height, 120 original */
+    width: 100%;
   }
   .card-title {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
   }
   .card {
-    width: 10rem;
+    width: 5rem; /* 10 original */
+    margin: 0.5rem; /* 0 original */
   }
   .custom-margin {
-    margin-top: -2rem !important;
+    margin-top: -7rem !important;
   }
   .indexTitle {
     margin-top: 1.2rem;
