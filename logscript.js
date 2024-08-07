@@ -242,7 +242,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
       querySnapshot.forEach(doc => {
         const data = doc.data();
-        displayLog(data.title, data.description, data.importance, data.signature, doc.id, data.imageUrl, data.timestamp.toDate());
+        const timestamp = data.timestamp;
+        let date;
+
+        // Check if the timestamp is a Firestore Timestamp object
+        if (timestamp && typeof timestamp.toDate === 'function') {
+          date = timestamp.toDate();
+        } else if (timestamp instanceof Date) {
+          date = timestamp; // If it's already a JS Date object
+        } else {
+          date = new Date(); // Fallback in case it's neither
+        }
+
+        displayLog(data.title, data.description, data.importance, data.signature, doc.id, data.imageUrl, date);
       });
     } catch (error) {
       console.error('Error loading logs:', error);
